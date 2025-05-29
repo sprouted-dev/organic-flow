@@ -1,0 +1,23 @@
+# Organic Flow
+.flow/
+!.flow/archives/
+weather.json
+weather.history.log
+
+# OS
+.DS_Store
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Logs
+*.log
+
+# Temporary
+tmp/
+temp/
