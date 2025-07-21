@@ -1,0 +1,30 @@
+# Organic Flow Implementation Registry
+# This file tracks all attempts to implement the ideas documented in this repository
+
+metadata:
+  description: "Registry of all implementation attempts for Organic Flow methodology"
+  created: 2025-01-21
+  methodology: "Each implementation tests specific Roots (assumptions)"
+
+implementations:
+  # Documentation attempts
+  - id: organic-flow-docs-v1
+    type: documentation
+    status: planned
+    branch: experiment/knowledge-branching-docs
+    hypothesis: "Markdown-based Seeds/Roots/Trunks structure is sufficient for knowledge management"
+    tests_roots:
+      - knowledge-eternal-code-temporary
+      - git-branches-for-knowledge
+    planned_start: 2025-01-21
+    
+  # Tool implementations will be tracked here as we build them
+  # Example:
+  # - id: sprout-flow-cli
+  #   type: tool
+  #   status: experiment
+  #   branch: experiment/sprout-flow-go
+  #   hypothesis: "Go-based CLI tools can manage knowledge branching workflow"
+  #   tests_roots:
+  #     - experiment-branch-lifecycle
+  #     - harvest-protocol-automation

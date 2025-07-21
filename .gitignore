@@ -1,0 +1,64 @@
+# Organic Flow Knowledge Repository
+# Main branch should NEVER contain code
+
+# Prevent accidental code commits to main branch
+*.js
+*.ts
+*.go
+*.py
+*.java
+*.c
+*.cpp
+*.rs
+*.rb
+*.php
+*.swift
+*.kt
+*.scala
+*.ex
+*.exs
+
+# Prevent build artifacts
+node_modules/
+target/
+dist/
+build/
+bin/
+obj/
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Allow only documentation
+!*.md
+!*.yaml
+!*.yml
+!*.txt
+!*.json
+
+# But still prevent package files that might contain code
+package.json
+package-lock.json
+go.mod
+go.sum
+Cargo.toml
+Gemfile
+requirements.txt
+pom.xml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.temp
+*.log
