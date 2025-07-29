@@ -1,8 +1,8 @@
 ---
-type: root
+type: assumption
 id: knowledge-eternal-code-temporary
 assumption: "Treating knowledge as eternal and code as temporary solves documentation and understanding problems"
-tests_seeds:
+tests_inputs:
   - code-knowledge-confusion
   - documentation-drift
 validation_method: "Apply to real projects and measure understanding clarity"
@@ -111,7 +111,7 @@ If this assumption is correct:
 4. Documentation will stay accurate
 5. Knowledge will compound over time
 
-## How This Addresses Seeds
+## How This Addresses Inputs
 
 ### Solves Code-Knowledge Confusion
 - Clear separation of eternal (knowledge) and temporary (code)
@@ -123,7 +123,7 @@ If this assumption is correct:
 - Code must match documentation, not vice versa
 - No drift possible when docs are primary
 
-## Related Roots
+## Related Assumptions
 - [git-branches-for-knowledge](git-branches-for-knowledge.md)
 - [failed-experiments-valuable](failed-experiments-valuable.md)
 - [documentation-drives-development](documentation-drives-development.md)

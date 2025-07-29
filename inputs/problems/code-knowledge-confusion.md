@@ -1,5 +1,6 @@
 ---
-type: seed
+type: input
+category: problem
 id: code-knowledge-confusion
 problem: "Developers confuse temporary code with eternal knowledge"
 discovered: 2025-01-21
@@ -65,7 +66,7 @@ The confusion between code and knowledge creates:
 
 As software becomes more complex and teams more distributed, the cost of lost knowledge compounds. AI assistants can generate code easily, but they can't regenerate lost understanding. The competitive advantage isn't in the code we write - it's in the knowledge we accumulate.
 
-## Related Seeds
+## Related Inputs
 - [multiple-implementations-chaos](multiple-implementations-chaos.md)
 - [lost-learning-from-failures](lost-learning-from-failures.md)
 - [documentation-drift](documentation-drift.md)

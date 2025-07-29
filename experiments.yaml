@@ -1,0 +1,47 @@
+# Experiments Registry
+# Track all experiments and implementations in this repository
+
+experiments:
+  - id: organic-flow-docs-v1
+    type: implementation
+    branch: impl/organic-flow-docs-v1
+    started: 2025-01-21
+    status: harvested
+    hypothesis: "Clear documentation without farming metaphors will improve understanding"
+    outcome: success
+    key_learnings:
+      - "Farming metaphors confused more than helped"
+      - "Clear terminology like inputs/assumptions/specifications works better"
+      - "'Harvest' is worth keeping - it's descriptive and memorable"
+    knowledge_pr: "Initial version used farming terminology throughout"
+    
+  - id: clarity-first-docs
+    type: implementation
+    branch: impl/clarity-first-docs
+    started: 2025-07-29
+    status: completed
+    hypothesis: "Removing metaphors and using familiar terms improves adoption"
+    outcome: success
+    key_learnings:
+      - "Developers prefer familiar terminology"
+      - "Knowledge PRs are the key innovation"
+      - "Integration with existing workflows is crucial"
+    knowledge_pr: "Created new documentation suite focused on clarity"
+    resulted_in:
+      - guides/organic-flow-clarity-first.md
+      - guides/organic-flow-adoption-guide.md
+      - guides/organic-flow-knowledge-pr.md
+      
+# Example template for new experiments:
+# - id: [unique-identifier]
+#   type: experiment|implementation
+#   branch: experiment/[name] or impl/[name]
+#   started: YYYY-MM-DD
+#   status: active|completed|abandoned|harvested
+#   hypothesis: "What we think will happen"
+#   outcome: success|partial-success|failed|abandoned
+#   key_learnings:
+#     - "What we discovered"
+#   knowledge_pr: PR# or description
+#   resulted_in: # optional
+#     - patterns/[pattern-name].md

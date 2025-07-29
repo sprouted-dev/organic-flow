@@ -1,8 +1,8 @@
 ---
-type: trunk
+type: specification
 id: pure-knowledge-main-branch
 title: "Main branch must contain only knowledge, never code"
-validated_roots:
+validated_assumptions:
   - knowledge-eternal-code-temporary
   - git-branches-for-knowledge
   - documentation-drives-development
@@ -23,9 +23,9 @@ The main branch of an Organic Flow repository must contain ONLY knowledge artifa
 ## What Belongs in Main
 
 ### YES - Knowledge Artifacts
-- **Seeds**: Problem and opportunity documentation
-- **Roots**: Assumption and hypothesis documentation  
-- **Trunks**: Validated requirements (like this document)
+- **Inputs**: Problems, ideas, and observations
+- **Assumptions**: Hypotheses to validate  
+- **Specifications**: Validated requirements (like this document)
 - **Knowledge**: Harvested insights from experiments
 - **Registries**: YAML/JSON tracking of implementations
 - **Guides**: How-to and conceptual documentation
@@ -68,9 +68,9 @@ When separation is absolute:
 ### Repository Structure
 ```
 main/
-├── seeds/                      # Problems to solve
-├── roots/                      # Assumptions to validate
-├── trunks/                     # Requirements like this
+├── inputs/                     # Problems, ideas, observations
+├── assumptions/                # Hypotheses to validate
+├── specifications/             # Requirements like this
 ├── knowledge/                  # Harvested learnings
 ├── guides/                     # How-to documentation
 ├── implementations.yaml        # Registry of all attempts
@@ -127,8 +127,8 @@ Automated checks that main contains no code:
 ## Working with Pure Knowledge
 
 ### Starting New Work
-1. Document the problem in seeds/
-2. Document assumptions in roots/
+1. Document the input in inputs/
+2. Document assumptions in assumptions/
 3. Get review and validation
 4. Create experiment branch for implementation
 5. Never add code to main
@@ -173,7 +173,7 @@ Automated checks that main contains no code:
 ✅ **Clear navigation**: Folder structure tells story
 ✅ **Version controlled**: Full history of knowledge evolution
 
-## Related Trunks
+## Related Specifications
 - [experiment-branch-lifecycle](experiment-branch-lifecycle.md)
 - [harvest-protocol-required](harvest-protocol-required.md)
 - [implementation-registry-spec](implementation-registry-spec.md)

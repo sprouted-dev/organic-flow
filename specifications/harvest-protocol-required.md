@@ -1,8 +1,8 @@
 ---
-type: trunk
+type: specification
 id: harvest-protocol-required
 title: "Knowledge extraction must follow a structured harvest protocol"
-validated_roots:
+validated_assumptions:
   - failed-experiments-valuable
   - knowledge-eternal-code-temporary
   - documentation-drives-development
@@ -55,11 +55,11 @@ Document specific technical discoveries:
 - Total memory needed: ~20GB for peak
 ```
 
-### Step 3: Validate or Invalidate Roots
+### Step 3: Validate or Invalidate Assumptions
 Update assumptions based on evidence:
 
 ```markdown
-# roots/session-storage-assumptions.md
+# assumptions/session-storage-assumptions.md
 
 ## Update: 2025-01-21
 
@@ -72,11 +72,11 @@ Update assumptions based on evidence:
 **Evidence**: experiment/session-redis results
 ```
 
-### Step 4: Discover New Seeds
+### Step 4: Discover New Inputs
 Document new problems uncovered:
 
 ```markdown
-# seeds/session-memory-scaling.md
+# inputs/problems/session-memory-scaling.md
 
 ## Problem: Session Storage Memory Scaling
 **Discovered**: During Redis session experiment
@@ -127,16 +127,16 @@ Record the experiment outcome:
     date: 2025-01-21
     insights_count: 7
     patterns_created: 2
-    roots_updated: 3
-    new_seeds: 1
+    assumptions_updated: 3
+    new_inputs: 1
 ```
 
 ## Harvest Quality Standards
 
 ### Completeness Checklist
 - [ ] Technical learnings documented
-- [ ] Roots validated/invalidated with evidence
-- [ ] New seeds discovered and documented
+- [ ] Assumptions validated/invalidated with evidence
+- [ ] New inputs discovered and documented
 - [ ] Patterns abstracted from specifics
 - [ ] Implementation registry updated
 - [ ] Links between artifacts created
@@ -189,7 +189,7 @@ Each insight should enable decisions:
 - Clarity of insights
 - Completeness of extraction
 - Quality of patterns
-- Accuracy of root updates
+- Accuracy of assumption updates
 
 ### Merge Criteria
 - All sections completed
@@ -202,8 +202,8 @@ Each insight should enable decisions:
 ### Knowledge Compounds
 Each harvest builds on previous:
 - Patterns reference other patterns
-- Seeds connect to form themes
-- Roots evolve with evidence
+- Inputs connect to form themes
+- Assumptions evolve with evidence
 - Understanding deepens
 
 ### Failure Becomes Valuable
@@ -234,8 +234,8 @@ sprout-flow harvest submit
 Provide templates for:
 - Technical insights
 - Pattern documentation
-- Root updates
-- Seed discovery
+- Assumption updates
+- Input discovery
 
 ### Metrics
 Track harvest quality:
@@ -251,7 +251,7 @@ Track harvest quality:
 ✅ **Timing requirements**: Prevents knowledge loss
 ✅ **Tool support**: Assists without constraining
 
-## Related Trunks
+## Related Specifications
 - [experiment-branch-lifecycle](experiment-branch-lifecycle.md)
 - [knowledge-accumulation-metrics](knowledge-accumulation-metrics.md)
 - [pattern-library-structure](pattern-library-structure.md)
