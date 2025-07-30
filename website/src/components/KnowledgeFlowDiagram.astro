@@ -1,0 +1,144 @@
+---
+// Interactive Knowledge Flow Diagram Component
+---
+
+<div class="knowledge-flow-container">
+  <div id="flow-diagram" class="relative h-96 bg-[var(--color-surface)] rounded-lg overflow-hidden shadow-lg">
+    <!-- Static diagram for initial render -->
+    <svg viewBox="0 0 800 400" class="w-full h-full">
+      <!-- Input Stage -->
+      <g class="stage" data-stage="input">
+        <rect x="50" y="150" width="120" height="100" rx="8" class="fill-[var(--color-stone-100)] dark:fill-[var(--color-surface)] stroke-[var(--color-stone-300)] dark:stroke-[var(--color-border)] stroke-2 hover:fill-[var(--color-stone-200)] dark:hover:fill-[var(--color-surface-hover)] transition-all duration-200 cursor-pointer"/>
+        <text x="110" y="190" text-anchor="middle" class="fill-[var(--color-text)] font-semibold">Inputs</text>
+        <text x="110" y="210" text-anchor="middle" class="fill-[var(--color-text-muted)] text-sm">Problems</text>
+        <text x="110" y="225" text-anchor="middle" class="fill-[var(--color-text-muted)] text-sm">Ideas</text>
+        <text x="110" y="240" text-anchor="middle" class="fill-[var(--color-text-muted)] text-sm">Observations</text>
+      </g>
+      
+      <!-- Arrow 1 -->
+      <path d="M 170 200 L 220 200" class="stroke-[var(--color-stone-400)] dark:stroke-[var(--color-text-subtle)] stroke-2 fill-none marker-end-url"/>
+      <polygon points="220,195 230,200 220,205" class="fill-[var(--color-stone-400)] dark:fill-[var(--color-text-subtle)]"/>
+      
+      <!-- Assumptions Stage -->
+      <g class="stage" data-stage="assumptions">
+        <rect x="230" y="150" width="120" height="100" rx="8" class="fill-[var(--color-stone-100)] dark:fill-[var(--color-surface)] stroke-[var(--color-stone-300)] dark:stroke-[var(--color-border)] stroke-2 hover:fill-[var(--color-stone-200)] dark:hover:fill-[var(--color-surface-hover)] transition-all duration-200 cursor-pointer"/>
+        <text x="290" y="190" text-anchor="middle" class="fill-[var(--color-text)] font-semibold">Assumptions</text>
+        <text x="290" y="210" text-anchor="middle" class="fill-[var(--color-text-muted)] text-sm">Hypotheses</text>
+        <text x="290" y="225" text-anchor="middle" class="fill-[var(--color-text-muted)] text-sm">to Test</text>
+      </g>
+      
+      <!-- Arrow 2 -->
+      <path d="M 350 200 L 400 200" class="stroke-[var(--color-stone-400)] dark:stroke-[var(--color-text-subtle)] stroke-2 fill-none"/>
+      <polygon points="400,195 410,200 400,205" class="fill-[var(--color-stone-400)] dark:fill-[var(--color-text-subtle)]"/>
+      
+      <!-- Experiments Stage -->
+      <g class="stage" data-stage="experiments">
+        <rect x="410" y="150" width="120" height="100" rx="8" class="fill-[var(--color-sprouted-50)] dark:fill-[var(--color-surface)] stroke-[var(--color-sprouted-300)] dark:stroke-[var(--color-sprouted-600)] stroke-2 hover:fill-[var(--color-sprouted-100)] dark:hover:fill-[var(--color-surface-hover)] transition-all duration-200 cursor-pointer"/>
+        <text x="470" y="190" text-anchor="middle" class="fill-[var(--color-text)] font-semibold">Experiments</text>
+        <text x="470" y="210" text-anchor="middle" class="fill-[var(--color-text-muted)] text-sm">Test in</text>
+        <text x="470" y="225" text-anchor="middle" class="fill-[var(--color-text-muted)] text-sm">Branches</text>
+      </g>
+      
+      <!-- Arrow 3 -->
+      <path d="M 530 200 L 580 200" class="stroke-[var(--color-stone-400)] dark:stroke-[var(--color-text-subtle)] stroke-2 fill-none"/>
+      <polygon points="580,195 590,200 580,205" class="fill-[var(--color-stone-400)] dark:fill-[var(--color-text-subtle)]"/>
+      
+      <!-- Knowledge Stage (emphasized with primary color) -->
+      <g class="stage" data-stage="knowledge">
+        <rect x="590" y="150" width="120" height="100" rx="8" class="fill-[var(--color-primary)] stroke-[var(--color-primary-hover)] stroke-3 hover:fill-[var(--color-primary-hover)] transition-all duration-200 cursor-pointer shadow-md hover:shadow-lg"/>
+        <text x="650" y="190" text-anchor="middle" class="fill-white font-bold">Knowledge</text>
+        <text x="650" y="210" text-anchor="middle" class="fill-[var(--color-sprouted-100)] text-sm">Learnings</text>
+        <text x="650" y="225" text-anchor="middle" class="fill-[var(--color-sprouted-100)] text-sm">Patterns</text>
+        <text x="650" y="240" text-anchor="middle" class="fill-[var(--color-sprouted-100)] text-sm">Insights</text>
+      </g>
+      
+      <!-- Feedback Loop -->
+      <path d="M 650 250 Q 650 320, 380 320 Q 110 320, 110 250" 
+            class="stroke-[var(--color-sprouted-500)] dark:stroke-[var(--color-sprouted-400)] stroke-2 fill-none stroke-dasharray-5-3"/>
+      <polygon points="105,250 110,240 115,250" class="fill-[var(--color-sprouted-500)] dark:fill-[var(--color-sprouted-400)]"/>
+      <text x="380" y="340" text-anchor="middle" class="fill-[var(--color-text-muted)] text-sm italic font-medium">Knowledge informs new inputs</text>
+    </svg>
+  </div>
+  
+  <!-- Description Panel -->
+  <div id="stage-description" class="mt-6 p-6 surface-neutral rounded-lg">
+    <h3 class="text-lg font-semibold mb-2 text-[var(--color-text)]">Click on a stage to learn more</h3>
+    <p class="text-[var(--color-text-muted)]">
+      The Organic Flow process is a continuous cycle where knowledge compounds over time.
+      Each stage builds on the previous, creating a sustainable development methodology.
+    </p>
+  </div>
+</div>
+
+<script>
+  // Stage descriptions
+  const stageDescriptions = {
+    input: {
+      title: "Capture Inputs",
+      description: "Start by documenting problems you're facing, ideas you have, or observations you've made. These become the foundation for your experiments. No judgment, just capture everything that might be valuable."
+    },
+    assumptions: {
+      title: "Form Assumptions", 
+      description: "State clear hypotheses about what you think will work. Use if/then statements with validation criteria. This forces clear thinking before diving into code."
+    },
+    experiments: {
+      title: "Run Experiments",
+      description: "Create isolated branches to test your assumptions. Every experiment produces insights, whether it succeeds or fails. Code is temporary - the learning is permanent."
+    },
+    knowledge: {
+      title: "Harvest Knowledge",
+      description: "Extract learnings, patterns, and insights via Knowledge PRs. This becomes your permanent knowledge base that outlasts any codebase. Failed experiments are often the most valuable!"
+    }
+  };
+
+  // Add interactivity
+  document.addEventListener('DOMContentLoaded', () => {
+    const stages = document.querySelectorAll('.stage');
+    const descriptionPanel = document.getElementById('stage-description');
+    
+    stages.forEach(stage => {
+      stage.addEventListener('click', () => {
+        const stageName = stage.dataset.stage;
+        const info = stageDescriptions[stageName];
+        
+        if (info) {
+          descriptionPanel.innerHTML = `
+            <h3 class="text-lg font-semibold mb-2 text-[var(--color-text)]">${info.title}</h3>
+            <p class="text-[var(--color-text-muted)]">${info.description}</p>
+          `;
+          
+          // Highlight selected stage
+          stages.forEach(s => {
+            s.classList.remove('selected');
+            const rect = s.querySelector('rect');
+            if (rect) {
+              rect.style.stroke = '';
+              rect.style.strokeWidth = '';
+            }
+          });
+          stage.classList.add('selected');
+          const selectedRect = stage.querySelector('rect');
+          if (selectedRect) {
+            selectedRect.style.stroke = 'var(--color-primary)';
+            selectedRect.style.strokeWidth = '4px';
+          }
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .stage {
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .stage:hover {
+    transform: translateY(-2px);
+  }
+  
+  .stage.selected rect {
+    stroke-width: 3px;
+  }
+</style>

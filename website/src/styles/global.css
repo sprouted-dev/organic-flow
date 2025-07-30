@@ -1,0 +1,872 @@
+@import "tailwindcss";
+
+/* Configure Tailwind CSS 4 dark mode with class strategy */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@source "./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}";
+
+@theme {
+  /* =================================
+     ORGANIC FLOW COLOR SYSTEM
+     Sophisticated forest floor palette
+     ================================= */
+
+  /* Primary Brand - Soft Sage Green */
+  --color-sprouted-50: #f7faf5;   /* Faintest green tint */
+  --color-sprouted-100: #ecf2e8;  /* Very light sage */
+  --color-sprouted-200: #d9e5d1;  /* Light sage */
+  --color-sprouted-300: #b9d0a9;  /* Soft sage */
+  --color-sprouted-400: #82b366;  /* Primary Brand - unchanged */
+  --color-sprouted-500: #6b9551;  /* Medium sage */
+  --color-sprouted-600: #557a3f;  /* Deep sage */
+  --color-sprouted-700: #415f30;  /* Forest green */
+  --color-sprouted-800: #2d4521;  /* Dark forest */
+  --color-sprouted-900: #1a2a13;  /* Deepest forest */
+  --color-sprouted-950: #0f1a0a;  /* Near black green */
+
+  /* Neutral Grays - Natural Stone */
+  --color-stone-50: #fafaf9;      /* Off-white */
+  --color-stone-100: #f5f5f4;     /* Light stone */
+  --color-stone-200: #e7e5e4;     /* Warm gray */
+  --color-stone-300: #d6d3d1;     /* Medium gray */
+  --color-stone-400: #a8a29e;     /* Muted gray */
+  --color-stone-500: #78716c;     /* Stone gray */
+  --color-stone-600: #57534e;     /* Dark stone */
+  --color-stone-700: #44403c;     /* Charcoal */
+  --color-stone-800: #292524;     /* Near black */
+  --color-stone-900: #1c1917;     /* Rich black */
+
+  /* Accent 1 - Muted Earth Tone (used sparingly) */
+  --color-earth-50: #faf9f7;      /* Lightest earth */
+  --color-earth-100: #f3f0eb;     /* Very light earth */
+  --color-earth-200: #e4ddd4;     /* Light earth */
+  --color-earth-300: #d2c6ba;     /* Soft earth */
+  --color-earth-400: #b89f88;     /* Warm earth - main accent */
+  --color-earth-500: #9d8470;     /* Medium earth */
+  --color-earth-600: #826a58;     /* Deep earth */
+  --color-earth-700: #675240;     /* Dark earth */
+  --color-earth-800: #4c3a2e;     /* Very dark earth */
+  --color-earth-900: #31241d;     /* Deepest earth */
+
+  /* Accent 2 - Muted Slate Blue (used very sparingly) */
+  --color-slate-50: #f8f9fa;      /* Lightest slate */
+  --color-slate-100: #f0f2f4;     /* Very light slate */
+  --color-slate-200: #dfe3e8;     /* Light slate */
+  --color-slate-300: #c5cdd6;     /* Soft slate */
+  --color-slate-400: #8b9cab;     /* Cool slate - secondary accent */
+  --color-slate-500: #6b7c8b;     /* Medium slate */
+  --color-slate-600: #526170;     /* Deep slate */
+  --color-slate-700: #3e4956;     /* Dark slate */
+  --color-slate-800: #2a323b;     /* Very dark slate */
+  --color-slate-900: #1a1f25;     /* Deepest slate */
+
+  /* Functional Color Mappings */
+  --color-primary: var(--color-sprouted-400);
+  --color-primary-hover: var(--color-sprouted-500);
+  --color-primary-active: var(--color-sprouted-600);
+  
+  --color-secondary: var(--color-slate-400);
+  --color-secondary-hover: var(--color-slate-500);
+  --color-secondary-active: var(--color-slate-600);
+  
+  --color-accent: var(--color-earth-400);
+  --color-accent-hover: var(--color-earth-500);
+  --color-accent-active: var(--color-earth-600);
+
+  /* UI Element Colors */
+  --color-background: #ffffff;
+  --color-surface: var(--color-stone-50);
+  --color-surface-subtle: var(--color-sprouted-50);
+  --color-border: var(--color-stone-200);
+  --color-border-focus: var(--color-sprouted-400);
+  
+  --color-text-primary: var(--color-stone-900);
+  --color-text-secondary: var(--color-stone-700);
+  --color-text-tertiary: var(--color-stone-600);
+  --color-text-inverse: #ffffff;
+  
+  --color-link: var(--color-sprouted-600);
+  --color-link-hover: var(--color-sprouted-700);
+  --color-link-visited: var(--color-sprouted-800);
+
+  /* Semantic Colors - Subtle and sophisticated */
+  --color-success: var(--color-sprouted-500);
+  --color-success-light: var(--color-sprouted-100);
+  --color-warning: var(--color-earth-500);
+  --color-warning-light: var(--color-earth-100);
+  --color-error: var(--color-earth-600);
+  --color-error-light: var(--color-earth-100);
+  --color-info: var(--color-slate-500);
+  --color-info-light: var(--color-slate-100);
+
+  /* Dark Mode Overrides */
+  --color-background-dark: var(--color-stone-900);
+  --color-surface-dark: var(--color-stone-800);
+  --color-surface-subtle-dark: var(--color-stone-700);
+  --color-border-dark: var(--color-stone-600);
+  --color-text-primary-dark: var(--color-stone-50);
+  --color-text-secondary-dark: var(--color-stone-200);
+  --color-text-tertiary-dark: var(--color-stone-300);
+}
+
+/* Custom utilities for consistent styling */
+@layer utilities {
+  /* Primary Gradient - Subtle forest floor */
+  .gradient-organic {
+    background: linear-gradient(135deg, var(--color-sprouted-400) 0%, var(--color-sprouted-600) 100%);
+  }
+  
+  /* Neutral Gradient - Stone to earth */
+  .gradient-earth {
+    background: linear-gradient(180deg, var(--color-stone-100) 0%, var(--color-stone-300) 100%);
+  }
+  
+  /* Subtle accent gradient */
+  .gradient-subtle {
+    background: linear-gradient(135deg, var(--color-sprouted-100) 0%, var(--color-stone-100) 100%);
+  }
+  
+  /* Text Gradients - Restrained */
+  .text-gradient-organic {
+    background: linear-gradient(135deg, var(--color-sprouted-500) 0%, var(--color-sprouted-700) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Surface Variations - Minimal */
+  .surface-primary {
+    background-color: #f7faf5;
+    border: 1px solid #e2ede2;
+  }
+  
+  .surface-neutral {
+    background-color: #fafaf9;
+    border: 1px solid #e7e5e4;
+  }
+  
+  .surface-accent {
+    background-color: #faf9f7;
+    border: 1px solid #e4ddd4;
+  }
+  
+  /* Enhanced Focus States */
+  .focus-organic:focus {
+    outline: 2px solid var(--color-sprouted-500);
+    outline-offset: 2px;
+  }
+  
+  .focus-organic:focus-visible {
+    box-shadow: 0 0 0 4px rgba(130, 179, 102, 0.15);
+  }
+  
+  /* Card Hover Effects - Subtle */
+  .card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.1);
+    border-color: var(--color-sprouted-300);
+  }
+  
+  /* Button Variations - Simplified */
+  .btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-text-inverse);
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--color-primary-hover);
+  }
+  
+  .btn-secondary {
+    background-color: var(--color-stone-200);
+    color: var(--color-text-primary);
+  }
+  
+  .btn-secondary:hover {
+    background-color: var(--color-stone-300);
+  }
+  
+  .btn-ghost {
+    background-color: transparent;
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border);
+  }
+  
+  .btn-ghost:hover {
+    background-color: var(--color-stone-50);
+    border-color: var(--color-sprouted-300);
+  }
+  
+  /* Button Press Effect */
+  .btn-press:active {
+    transform: scale(0.98);
+  }
+  
+  /* Badge Variations - Minimal */
+  .badge-primary {
+    background-color: var(--color-sprouted-100);
+    color: var(--color-sprouted-700);
+    border: 1px solid var(--color-sprouted-200);
+  }
+  
+  .badge-neutral {
+    background-color: var(--color-stone-100);
+    color: var(--color-stone-700);
+    border: 1px solid var(--color-stone-200);
+  }
+  
+  .badge-accent {
+    background-color: var(--color-earth-100);
+    color: var(--color-earth-700);
+    border: 1px solid var(--color-earth-200);
+  }
+  
+  /* Smooth transitions for dark mode */
+  * {
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+  
+  /* Dark mode adjustments */
+  .dark .gradient-organic {
+    background: linear-gradient(135deg, var(--color-sprouted-600) 0%, var(--color-sprouted-800) 100%);
+  }
+  
+  .dark .surface-primary {
+    background-color: var(--color-sprouted-900);
+    border-color: var(--color-sprouted-700);
+  }
+  
+  .dark .surface-neutral {
+    background-color: var(--color-stone-800);
+    border-color: var(--color-stone-600);
+  }
+}
+
+/* CSS Variables that switch based on theme */
+:root {
+  /* Light mode (default) */
+  --color-bg: #ffffff;
+  --color-bg-subtle: var(--color-stone-50);
+  --color-bg-muted: #fafbfa; /* Very subtle green-gray */
+  --color-surface: #ffffff;
+  --color-surface-hover: var(--color-stone-50);
+  --color-border: var(--color-stone-200);
+  --color-border-hover: var(--color-stone-300);
+  
+  --color-text: var(--color-stone-900);
+  --color-text-muted: var(--color-stone-600);
+  --color-text-subtle: var(--color-stone-500);
+  --color-text-contrast: #ffffff;
+  
+  --color-primary-bg: var(--color-sprouted-400);
+  --color-primary-bg-hover: var(--color-sprouted-500);
+  --color-primary-text: #ffffff;
+  
+  --color-link: var(--color-sprouted-600);
+  --color-link-hover: var(--color-sprouted-700);
+}
+
+/* Dark mode overrides - More balanced contrast */
+.dark {
+  --color-bg: #0f1410; /* Darker but with green undertone */
+  --color-bg-subtle: #1a1f1b; /* Slightly lighter */
+  --color-bg-muted: #1f2420; /* Visible distinction */
+  --color-surface: #242a25; /* Clear surface separation */
+  --color-surface-hover: #2a302b;
+  --color-border: #3a403b;
+  --color-border-hover: #4a504b;
+  
+  --color-text: #e8eae8; /* Softer white */
+  --color-text-muted: #a8aba8;
+  --color-text-subtle: #787b78;
+  --color-text-contrast: #0f1410;
+  
+  --color-primary-bg: var(--color-sprouted-400);
+  --color-primary-bg-hover: var(--color-sprouted-500);
+  --color-primary-text: #ffffff;
+  
+  --color-link: var(--color-sprouted-400);
+  --color-link-hover: var(--color-sprouted-300);
+}
+
+/* Update gradients for dark mode */
+.dark .gradient-subtle {
+  background: linear-gradient(135deg, #1f2420 0%, #1a1f1b 100%);
+}
+
+.dark .text-gradient-organic {
+  background: linear-gradient(135deg, var(--color-sprouted-400) 0%, var(--color-sprouted-300) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Update surfaces for dark mode */
+.dark .surface-primary {
+  background-color: #1f2420;
+  border-color: #3a403b;
+}
+
+.dark .surface-neutral {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+.dark .surface-accent {
+  background-color: #252320;
+  border-color: #3a3530;
+}
+
+/* Update button styles for dark mode */
+.dark .btn-ghost {
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+.dark .btn-ghost:hover {
+  background-color: var(--color-surface);
+  border-color: var(--color-sprouted-400);
+  color: var(--color-sprouted-400);
+}
+
+.dark .btn-secondary {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+}
+
+.dark .btn-secondary:hover {
+  background-color: var(--color-surface-hover);
+}
+
+/* Update badges for dark mode */
+.dark .badge-primary {
+  background-color: #1f2b1f;
+  color: var(--color-sprouted-300);
+  border-color: var(--color-sprouted-600);
+}
+
+.dark .badge-neutral {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.dark .badge-accent {
+  background-color: #2b251f;
+  color: var(--color-earth-300);
+  border-color: var(--color-earth-600);
+}
+
+/* Card hover in dark mode */
+.dark .card-hover:hover {
+  box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.8), 0 0 0 1px var(--color-sprouted-600);
+  border-color: var(--color-sprouted-600);
+}
+
+/* Code blocks - Softer, more integrated styling */
+.code-block {
+  background-color: var(--color-stone-50);
+  color: var(--color-stone-900);
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  border: 1px solid var(--color-stone-200);
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.dark .code-block {
+  background-color: #1a2420; /* Softer dark green-gray instead of harsh black */
+  color: #d4d8d4; /* Softer white with slight green tint */
+  border: 1px solid #2a3530; /* Warmer border */
+}
+
+/* Inline code - More subtle and integrated */
+code:not(.code-block code) {
+  background-color: var(--color-stone-100);
+  color: var(--color-stone-800);
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+  border: 1px solid var(--color-stone-200);
+}
+
+.dark code:not(.code-block code) {
+  background-color: #1a2420; /* Same as code blocks for consistency */
+  color: var(--color-sprouted-300);
+  border: 1px solid #2a3530;
+}
+
+/* Numbered steps */
+.step-number {
+  background: linear-gradient(135deg, var(--color-sprouted-500) 0%, var(--color-sprouted-700) 100%);
+  color: white;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: bold;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.dark .step-number {
+  background: linear-gradient(135deg, var(--color-sprouted-600) 0%, var(--color-sprouted-800) 100%);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+/* ASCII art and diagram styling */
+.ascii-diagram {
+  background-color: var(--color-stone-50);
+  color: var(--color-stone-800);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-stone-200);
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.dark .ascii-diagram {
+  background-color: #1a2420; /* Same as code blocks */
+  color: #d4d8d4;
+  border-color: #2a3530;
+}
+
+/* Diagram containers */
+.diagram-container {
+  background-color: var(--color-bg-subtle);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-border);
+}
+
+.dark .diagram-container {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+/* Markdown content code blocks - softer styling */
+.prose pre {
+  background-color: var(--color-stone-50) !important;
+  color: var(--color-stone-800) !important;
+  border: 1px solid var(--color-stone-200) !important;
+}
+
+.prose.dark pre,
+.dark .prose pre {
+  background-color: #1a2420 !important; /* Same as code blocks */
+  color: #d4d8d4 !important;
+  border: 1px solid #2a3530 !important;
+}
+
+/* Markdown inline code */
+.prose code:not(pre code) {
+  background-color: var(--color-stone-100) !important;
+  color: var(--color-stone-800) !important;
+  padding: 0.125rem 0.375rem !important;
+  border-radius: 0.25rem !important;
+  border: 1px solid var(--color-stone-200) !important;
+}
+
+.prose.dark code:not(pre code),
+.dark .prose code:not(pre code) {
+  background-color: #1a2420 !important;
+  color: var(--color-sprouted-300) !important;
+  border: 1px solid #2a3530 !important;
+}
+
+/* Override syntax highlighting colors to use our theme */
+/* Light mode syntax highlighting */
+.shiki,
+.shiki.min-light,
+.shiki-code-block {
+  background-color: var(--color-stone-50) !important;
+  color: var(--color-stone-800) !important;
+}
+
+.shiki .line,
+.shiki.min-light .line {
+  color: var(--color-stone-800) !important;
+}
+
+/* Replace blue colors with sage green */
+.shiki .token.keyword,
+.shiki .token.control-flow,
+.shiki .token.function {
+  color: var(--color-sprouted-600) !important;
+}
+
+.shiki .token.string {
+  color: var(--color-earth-600) !important;
+}
+
+.shiki .token.comment {
+  color: var(--color-stone-500) !important;
+}
+
+.shiki .token.parameter,
+.shiki .token.variable {
+  color: var(--color-stone-700) !important;
+}
+
+.shiki .token.operator,
+.shiki .token.punctuation {
+  color: var(--color-stone-600) !important;
+}
+
+.shiki .token.number,
+.shiki .token.constant {
+  color: var(--color-sprouted-700) !important;
+}
+
+/* Dark mode syntax highlighting */
+.dark .shiki,
+.dark .shiki.min-dark,
+.dark .shiki-code-block,
+.shiki.min-dark {
+  background-color: #1a2420 !important;
+}
+
+.dark .shiki .line,
+.dark .shiki.min-dark .line,
+.shiki.min-dark .line {
+  color: #d4d8d4 !important;
+}
+
+/* Dark mode token colors */
+.dark .shiki .token.keyword,
+.dark .shiki .token.control-flow,
+.dark .shiki .token.function,
+.shiki.min-dark .token.keyword,
+.shiki.min-dark .token.control-flow,
+.shiki.min-dark .token.function {
+  color: var(--color-sprouted-400) !important;
+}
+
+.dark .shiki .token.string,
+.shiki.min-dark .token.string {
+  color: var(--color-earth-400) !important;
+}
+
+.dark .shiki .token.comment,
+.shiki.min-dark .token.comment {
+  color: var(--color-stone-400) !important;
+}
+
+.dark .shiki .token.parameter,
+.dark .shiki .token.variable,
+.shiki.min-dark .token.parameter,
+.shiki.min-dark .token.variable {
+  color: var(--color-stone-300) !important;
+}
+
+.dark .shiki .token.operator,
+.dark .shiki .token.punctuation,
+.shiki.min-dark .token.operator,
+.shiki.min-dark .token.punctuation {
+  color: var(--color-stone-400) !important;
+}
+
+.dark .shiki .token.number,
+.dark .shiki .token.constant,
+.shiki.min-dark .token.number,
+.shiki.min-dark .token.constant {
+  color: var(--color-sprouted-300) !important;
+}
+
+/* Override any links inside code blocks */
+.shiki a,
+.prose pre a,
+.prose code a {
+  color: var(--color-sprouted-500) !important;
+  text-decoration: underline !important;
+  text-decoration-color: var(--color-sprouted-300) !important;
+}
+
+.shiki a:hover,
+.prose pre a:hover,
+.prose code a:hover {
+  color: var(--color-sprouted-400) !important;
+  text-decoration-color: var(--color-sprouted-400) !important;
+}
+
+.dark .shiki a,
+.dark .prose pre a,
+.dark .prose code a {
+  color: var(--color-sprouted-400) !important;
+  text-decoration-color: var(--color-sprouted-600) !important;
+}
+
+.dark .shiki a:hover,
+.dark .prose pre a:hover,
+.dark .prose code a:hover {
+  color: var(--color-sprouted-300) !important;
+  text-decoration-color: var(--color-sprouted-300) !important;
+}
+
+/* Fix arrows and special characters in code */
+.shiki .token.arrow,
+.shiki .token.special {
+  color: var(--color-stone-600) !important;
+}
+
+.dark .shiki .token.arrow,
+.dark .shiki .token.special,
+.shiki.min-dark .token.arrow,
+.shiki.min-dark .token.special {
+  color: var(--color-stone-400) !important;
+}
+
+/* Handle specific problematic tokens like >> arrows */
+.shiki .token.plain-text {
+  color: var(--color-stone-700) !important;
+}
+
+.dark .shiki .token.plain-text,
+.shiki.min-dark .token.plain-text {
+  color: var(--color-stone-300) !important;
+}
+
+/* Override Tailwind prose default blue links */
+.prose a,
+.prose-stone a,
+.prose-a\:text-\[var\(--color-link\)\] a {
+  color: var(--color-sprouted-600) !important;
+  text-decoration: none !important;
+}
+
+.prose a:hover,
+.prose-stone a:hover,
+.hover\:prose-a\:text-\[var\(--color-link-hover\)\] a:hover {
+  color: var(--color-sprouted-700) !important;
+  text-decoration: underline !important;
+}
+
+.dark .prose a,
+.dark .prose-stone a,
+.dark.prose-invert a,
+.prose-invert a {
+  color: var(--color-sprouted-400) !important;
+}
+
+.dark .prose a:hover,
+.dark .prose-stone a:hover,
+.dark.prose-invert a:hover,
+.prose-invert a:hover {
+  color: var(--color-sprouted-300) !important;
+}
+
+/* Ensure prose classes use our custom properties */
+.prose-a\:text-\[var\(--color-link\)\] a {
+  color: var(--color-link) !important;
+}
+
+.hover\:prose-a\:text-\[var\(--color-link-hover\)\] a:hover {
+  color: var(--color-link-hover) !important;
+}
+
+/* Ensure TOC links use our theme colors */
+nav a {
+  color: inherit;
+}
+
+nav a:hover {
+  color: var(--color-sprouted-600);
+}
+
+.dark nav a:hover {
+  color: var(--color-sprouted-400);
+}
+
+/* Override any remaining blue colors in code */
+.shiki span[style*="color:#0969da"],
+.shiki span[style*="color:#0066cc"],
+.shiki span[style*="color:#007acc"],
+.shiki span[style*="color:blue"] {
+  color: var(--color-sprouted-600) !important;
+}
+
+.dark .shiki span[style*="color:#0969da"],
+.dark .shiki span[style*="color:#0066cc"],
+.dark .shiki span[style*="color:#007acc"],
+.dark .shiki span[style*="color:blue"],
+.shiki.min-dark span[style*="color:#0969da"],
+.shiki.min-dark span[style*="color:#0066cc"],
+.shiki.min-dark span[style*="color:#007acc"],
+.shiki.min-dark span[style*="color:blue"] {
+  color: var(--color-sprouted-400) !important;
+}
+
+/* Override red/orange colors in code */
+.shiki span[style*="color:#d73a49"],
+.shiki span[style*="color:#e3116c"],
+.shiki span[style*="color:#ff0000"],
+.shiki span[style*="color:red"],
+.shiki span[style*="color:#ff6600"],
+.shiki span[style*="color:orange"] {
+  color: var(--color-earth-600) !important;
+}
+
+.dark .shiki span[style*="color:#d73a49"],
+.dark .shiki span[style*="color:#e3116c"],
+.dark .shiki span[style*="color:#ff0000"],
+.dark .shiki span[style*="color:red"],
+.dark .shiki span[style*="color:#ff6600"],
+.dark .shiki span[style*="color:orange"],
+.shiki.min-dark span[style*="color:#d73a49"],
+.shiki.min-dark span[style*="color:#e3116c"],
+.shiki.min-dark span[style*="color:#ff0000"],
+.shiki.min-dark span[style*="color:red"],
+.shiki.min-dark span[style*="color:#ff6600"],
+.shiki.min-dark span[style*="color:orange"] {
+  color: var(--color-earth-400) !important;
+}
+
+/* Handle bash redirect operators specifically */
+.shiki .token.bash,
+.shiki .token.shell {
+  color: var(--color-stone-700) !important;
+}
+
+.shiki .token.bash .token.operator,
+.shiki .token.shell .token.operator {
+  color: var(--color-stone-600) !important;
+}
+
+.dark .shiki .token.bash,
+.dark .shiki .token.shell,
+.shiki.min-dark .token.bash,
+.shiki.min-dark .token.shell {
+  color: var(--color-stone-300) !important;
+}
+
+.dark .shiki .token.bash .token.operator,
+.dark .shiki .token.shell .token.operator,
+.shiki.min-dark .token.bash .token.operator,
+.shiki.min-dark .token.shell .token.operator {
+  color: var(--color-stone-400) !important;
+}
+
+/* Force all syntax highlighting to use our palette */
+.shiki span[style] {
+  /* Remove inline styles that conflict with our theme */
+  color: inherit !important;
+}
+
+/* Reapply our token colors with higher specificity */
+.shiki .token.keyword,
+.shiki .token.control,
+.shiki .token.control-flow,
+.shiki .token.function {
+  color: var(--color-sprouted-600) !important;
+}
+
+.shiki .token.string,
+.shiki .token.string-expression,
+.shiki .token.template-string {
+  color: var(--color-earth-600) !important;
+}
+
+.shiki .token.comment,
+.shiki .token.prolog,
+.shiki .token.doctype,
+.shiki .token.cdata {
+  color: var(--color-stone-500) !important;
+  font-style: italic;
+}
+
+.shiki .token.punctuation,
+.shiki .token.operator,
+.shiki .token.arithmetic,
+.shiki .token.assignment {
+  color: var(--color-stone-600) !important;
+}
+
+.shiki .token.number,
+.shiki .token.boolean,
+.shiki .token.constant,
+.shiki .token.symbol,
+.shiki .token.deleted {
+  color: var(--color-sprouted-700) !important;
+}
+
+.shiki .token.variable,
+.shiki .token.parameter,
+.shiki .token.property {
+  color: var(--color-stone-700) !important;
+}
+
+/* Dark mode token overrides */
+.dark .shiki .token.keyword,
+.dark .shiki .token.control,
+.dark .shiki .token.control-flow,
+.dark .shiki .token.function,
+.shiki.min-dark .token.keyword,
+.shiki.min-dark .token.control,
+.shiki.min-dark .token.control-flow,
+.shiki.min-dark .token.function {
+  color: var(--color-sprouted-400) !important;
+}
+
+.dark .shiki .token.string,
+.dark .shiki .token.string-expression,
+.dark .shiki .token.template-string,
+.shiki.min-dark .token.string,
+.shiki.min-dark .token.string-expression,
+.shiki.min-dark .token.template-string {
+  color: var(--color-earth-400) !important;
+}
+
+.dark .shiki .token.comment,
+.dark .shiki .token.prolog,
+.dark .shiki .token.doctype,
+.dark .shiki .token.cdata,
+.shiki.min-dark .token.comment,
+.shiki.min-dark .token.prolog,
+.shiki.min-dark .token.doctype,
+.shiki.min-dark .token.cdata {
+  color: var(--color-stone-400) !important;
+}
+
+.dark .shiki .token.punctuation,
+.dark .shiki .token.operator,
+.dark .shiki .token.arithmetic,
+.dark .shiki .token.assignment,
+.shiki.min-dark .token.punctuation,
+.shiki.min-dark .token.operator,
+.shiki.min-dark .token.arithmetic,
+.shiki.min-dark .token.assignment {
+  color: var(--color-stone-400) !important;
+}
+
+.dark .shiki .token.number,
+.dark .shiki .token.boolean,
+.dark .shiki .token.constant,
+.dark .shiki .token.symbol,
+.dark .shiki .token.deleted,
+.shiki.min-dark .token.number,
+.shiki.min-dark .token.boolean,
+.shiki.min-dark .token.constant,
+.shiki.min-dark .token.symbol,
+.shiki.min-dark .token.deleted {
+  color: var(--color-sprouted-300) !important;
+}
+
+.dark .shiki .token.variable,
+.dark .shiki .token.parameter,
+.dark .shiki .token.property,
+.shiki.min-dark .token.variable,
+.shiki.min-dark .token.parameter,
+.shiki.min-dark .token.property {
+  color: var(--color-stone-300) !important;
+}
+

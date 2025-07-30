@@ -1,0 +1,205 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+// Read experiments.yaml to get real examples
+const experimentsData = await import.meta.glob('/experiments.yaml', { as: 'raw' });
+const experimentsContent = Object.values(experimentsData)[0] || '';
+
+// Parse YAML manually for simple structure
+const experiments = [];
+if (experimentsContent) {
+  const lines = experimentsContent.split('\n');
+  let currentExperiment = null;
+  
+  lines.forEach(line => {
+    if (line.includes('- id:')) {
+      if (currentExperiment) experiments.push(currentExperiment);
+      currentExperiment = { id: line.split('id:')[1].trim() };
+    } else if (currentExperiment && line.includes('type:')) {
+      currentExperiment.type = line.split('type:')[1].trim();
+    } else if (currentExperiment && line.includes('branch:')) {
+      currentExperiment.branch = line.split('branch:')[1].trim();
+    } else if (currentExperiment && line.includes('status:')) {
+      currentExperiment.status = line.split('status:')[1].trim();
+    } else if (currentExperiment && line.includes('hypothesis:')) {
+      currentExperiment.hypothesis = line.split('hypothesis:')[1].trim().replace(/['"]/g, '');
+    } else if (currentExperiment && line.includes('outcome:')) {
+      currentExperiment.outcome = line.split('outcome:')[1].trim();
+    }
+  });
+  if (currentExperiment) experiments.push(currentExperiment);
+}
+---
+
+<BaseLayout title="Examples">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-4xl font-bold mb-8">Real Organic Flow Examples</h1>
+      
+      <p class="text-xl text-gray-600 dark:text-gray-400 mb-12">
+        See how Organic Flow works in practice. These are actual experiments from this repository,
+        showing the complete cycle from input to knowledge.
+      </p>
+
+      <!-- Example Flow -->
+      <section class="mb-16">
+        <h2 class="text-2xl font-semibold mb-6">Example: Parallel Test Execution</h2>
+        
+        <div class="space-y-6">
+          <!-- Step 1: Input -->
+          <div class="bg-white dark:bg-gray-800 rounded-lg p-6 border-l-4 border-gray-400">
+            <h3 class="font-semibold text-lg mb-2">1. Input: Problem Identified</h3>
+            <div class="bg-gray-50 dark:bg-gray-900 p-4 rounded font-mono text-sm">
+              <p class="text-gray-600 dark:text-gray-400 mb-2">inputs/problems/slow-test-suite.md</p>
+              <div class="text-gray-700 dark:text-gray-300">
+                <p># Slow Test Suite</p>
+                <p class="mt-2">Our test suite takes 15 minutes to run, making the feedback loop painfully slow.</p>
+                <p>Developers avoid running tests locally, leading to more CI failures.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2: Assumption -->
+          <div class="bg-white dark:bg-gray-800 rounded-lg p-6 border-l-4 border-organic-400">
+            <h3 class="font-semibold text-lg mb-2">2. Assumption: Hypothesis Formed</h3>
+            <div class="bg-gray-50 dark:bg-gray-900 p-4 rounded font-mono text-sm">
+              <p class="text-gray-600 dark:text-gray-400 mb-2">assumptions/parallel-test-execution.md</p>
+              <div class="text-gray-700 dark:text-gray-300">
+                <p>If we run tests in parallel using pytest-xdist,</p>
+                <p>then we can reduce test suite runtime by 60-70%,</p>
+                <p>given our tests are mostly CPU-bound and independent.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3: Experiment -->
+          <div class="bg-white dark:bg-gray-800 rounded-lg p-6 border-l-4 border-blue-400">
+            <h3 class="font-semibold text-lg mb-2">3. Experiment: Test in Branch</h3>
+            <div class="bg-gray-50 dark:bg-gray-900 p-4 rounded">
+              <p class="font-mono text-sm text-gray-600 dark:text-gray-400 mb-2">Branch: experiment/parallel-tests</p>
+              <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-1">
+                <li>Installed pytest-xdist</li>
+                <li>Configured parallel execution</li>
+                <li>Fixed thread-safety issues</li>
+                <li>Measured performance improvements</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Step 4: Knowledge -->
+          <div class="bg-white dark:bg-gray-800 rounded-lg p-6 border-l-4 border-organic-600">
+            <h3 class="font-semibold text-lg mb-2">4. Knowledge: Learnings Harvested</h3>
+            <div class="bg-gray-50 dark:bg-gray-900 p-4 rounded font-mono text-sm">
+              <p class="text-gray-600 dark:text-gray-400 mb-2">learnings/parallel-test-execution-results.md</p>
+              <div class="text-gray-700 dark:text-gray-300 space-y-2">
+                <p><strong>✅ What Worked:</strong></p>
+                <ul class="list-disc list-inside ml-4">
+                  <li>Achieved 65% speedup (15min → 5.5min)</li>
+                  <li>CPU-bound tests parallelized perfectly</li>
+                </ul>
+                <p><strong>❌ What Didn't:</strong></p>
+                <ul class="list-disc list-inside ml-4">
+                  <li>12 database tests failed due to isolation issues</li>
+                  <li>Some fixtures weren't thread-safe</li>
+                </ul>
+                <p><strong>💡 Key Insight:</strong> Run database tests separately, not in parallel</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Repository Examples -->
+      {experiments.length > 0 && (
+        <section class="mb-16">
+          <h2 class="text-2xl font-semibold mb-6">Experiments in This Repository</h2>
+          <div class="space-y-4">
+            {experiments.filter(exp => exp.type === 'experiment' || exp.type === 'implementation').map(exp => (
+              <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm">
+                <div class="flex items-start justify-between mb-3">
+                  <h3 class="font-semibold text-lg">{exp.id}</h3>
+                  <span class={`px-3 py-1 rounded-full text-sm font-medium ${
+                    exp.status === 'completed' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' :
+                    exp.status === 'active' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' :
+                    exp.status === 'harvested' ? 'bg-organic-100 text-organic-800 dark:bg-organic-900 dark:text-organic-200' :
+                    'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300'
+                  }`}>
+                    {exp.status}
+                  </span>
+                </div>
+                {exp.hypothesis && (
+                  <p class="text-gray-600 dark:text-gray-400 mb-3 italic">"{exp.hypothesis}"</p>
+                )}
+                <div class="flex items-center space-x-4 text-sm">
+                  <span class="font-mono text-gray-500 dark:text-gray-500">
+                    Branch: {exp.branch}
+                  </span>
+                  {exp.outcome && (
+                    <span class={`font-medium ${
+                      exp.outcome === 'success' ? 'text-green-600 dark:text-green-400' :
+                      exp.outcome === 'partial-success' ? 'text-yellow-600 dark:text-yellow-400' :
+                      'text-red-600 dark:text-red-400'
+                    }`}>
+                      Outcome: {exp.outcome}
+                    </span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Knowledge PR Example -->
+      <section class="mb-16">
+        <h2 class="text-2xl font-semibold mb-6">Knowledge PR Example</h2>
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm">
+          <div class="border-b border-gray-200 dark:border-gray-700 pb-4 mb-4">
+            <h3 class="font-semibold text-lg">PR #42: Harvest learnings from parallel test experiment</h3>
+            <div class="flex items-center space-x-4 mt-2 text-sm text-gray-600 dark:text-gray-400">
+              <span>🌱 Knowledge PR</span>
+              <span>+45 lines</span>
+              <span>No code changes</span>
+            </div>
+          </div>
+          
+          <div class="space-y-4">
+            <div>
+              <p class="font-medium mb-2">Files changed:</p>
+              <ul class="list-disc list-inside text-sm text-gray-700 dark:text-gray-300">
+                <li>learnings/parallel-test-execution-results.md</li>
+                <li>patterns/parallel-test-strategy.md</li>
+                <li>experiments.yaml (status update)</li>
+              </ul>
+            </div>
+            
+            <div>
+              <p class="font-medium mb-2">PR Description:</p>
+              <p class="text-sm text-gray-600 dark:text-gray-400">
+                This PR harvests learnings from the parallel test execution experiment. 
+                The experiment achieved its primary goal (65% speedup) but uncovered important 
+                constraints around database test isolation. These learnings will guide future 
+                performance optimization efforts.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Call to Action -->
+      <section class="bg-organic-50 dark:bg-organic-950 rounded-lg p-8 text-center">
+        <h2 class="text-2xl font-semibold mb-4">Ready to Try Organic Flow?</h2>
+        <p class="text-lg text-gray-600 dark:text-gray-300 mb-6">
+          Start with a real problem you're facing. Document it, form an assumption, and run your first experiment.
+        </p>
+        <a href="/quickstart" class="inline-flex items-center px-6 py-3 bg-organic-600 text-white rounded-lg hover:bg-organic-700 transition-colors font-medium">
+          Start Your First Experiment
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </a>
+      </section>
+    </div>
+  </div>
+</BaseLayout>

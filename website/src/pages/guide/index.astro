@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const guides = await getCollection('guide');
+
+// Group guides by category
+const categorizedGuides = {
+  'Getting Started': [],
+  'Core Concepts': [],
+  'Practical Guides': [],
+  'Advanced Topics': []
+};
+
+// Simple categorization based on filename patterns
+guides.forEach(guide => {
+  const slug = guide.slug;
+  if (slug.includes('clarity-first') || slug.includes('visual-overview')) {
+    categorizedGuides['Getting Started'].push(guide);
+  } else if (slug.includes('knowledge-types') || slug.includes('knowledge-pr')) {
+    categorizedGuides['Core Concepts'].push(guide);
+  } else if (slug.includes('practical') || slug.includes('adoption')) {
+    categorizedGuides['Practical Guides'].push(guide);
+  } else {
+    categorizedGuides['Advanced Topics'].push(guide);
+  }
+});
+
+// Sort guides within each category
+Object.keys(categorizedGuides).forEach(category => {
+  categorizedGuides[category].sort((a, b) => a.slug.localeCompare(b.slug));
+});
+---
+
+<BaseLayout title="Guide">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-4xl font-bold mb-8">Organic Flow Guide</h1>
+      <p class="text-xl text-[var(--color-text-muted)] mb-12">
+        Learn how to implement knowledge-first development in your projects.
+      </p>
+
+      {Object.entries(categorizedGuides).map(([category, categoryGuides]) => (
+        categoryGuides.length > 0 && (
+          <section class="mb-12">
+            <h2 class="text-2xl font-semibold mb-6 text-[var(--color-text)]">{category}</h2>
+            <div class="space-y-6">
+              {categoryGuides.map(guide => (
+                <article class="surface-neutral rounded-lg p-6 card-hover">
+                  <h3 class="text-xl font-semibold mb-2">
+                    <a href={`/guide/${guide.slug}`} class="text-[var(--color-text)] hover:text-[var(--color-primary)] transition-colors">
+                      {guide.data.title}
+                    </a>
+                  </h3>
+                  {guide.data.description && (
+                    <p class="text-[var(--color-text-muted)] mb-3">{guide.data.description}</p>
+                  )}
+                  <a href={`/guide/${guide.slug}`} class="text-[var(--color-link)] hover:text-[var(--color-link-hover)] hover:underline text-sm font-medium transition-colors">
+                    Read more →
+                  </a>
+                </article>
+              ))}
+            </div>
+          </section>
+        )
+      ))}
+    </div>
+  </div>
+</BaseLayout>

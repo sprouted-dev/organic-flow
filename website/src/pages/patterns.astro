@@ -1,0 +1,174 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+// Try to get patterns collection
+let patterns = [];
+try {
+  patterns = await getCollection('patterns');
+} catch (e) {
+  // No patterns yet
+}
+
+// Example patterns to show the concept
+const examplePatterns = [
+  {
+    title: "Temperature-Based Task Selection",
+    category: "Productivity",
+    description: "Match your energy level to appropriate tasks for optimal flow",
+    example: `Morning (High Energy): Architecture design, complex problem solving
+Afternoon (Medium Energy): Regular development, code reviews  
+Evening (Low Energy): Documentation, simple fixes, organization`
+  },
+  {
+    title: "Knowledge PR Template",
+    category: "Process",
+    description: "Consistent format for harvesting learnings from experiments",
+    example: `## What We Learned
+- [Specific discovery]
+
+## What Worked
+- [Successful approaches]
+
+## What Didn't Work  
+- [Failed approaches and why]
+
+## Recommendations
+- [Actionable next steps]`
+  },
+  {
+    title: "Experiment Branch Naming",
+    category: "Convention",
+    description: "Clear branch names that communicate intent",
+    example: `experiment/[hypothesis-keyword]
+Example: experiment/parallel-tests
+Example: experiment/redis-caching
+Example: experiment/websocket-sync`
+  },
+  {
+    title: "Failed Experiment Value Extraction",
+    category: "Mindset",
+    description: "Every failed experiment contains valuable insights",
+    example: `Document:
+- Why the approach seemed promising
+- What specific issues were encountered
+- Alternative approaches discovered
+- Constraints that were uncovered`
+  }
+];
+---
+
+<BaseLayout title="Patterns">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-4xl font-bold mb-8">Organic Flow Patterns</h1>
+      
+      <p class="text-xl text-[var(--color-text-muted)] mb-12">
+        Reusable solutions and practices that emerge from applying Organic Flow. 
+        These patterns help you work more effectively with the methodology.
+      </p>
+
+      {patterns.length > 0 ? (
+        <section class="space-y-8">
+          {patterns.map(pattern => (
+            <article class="bg-[var(--color-surface)] rounded-lg p-6 border border-[var(--color-border)]">
+              <h2 class="text-xl font-semibold mb-3">
+                <a href={`/patterns/${pattern.slug}`} class="hover:text-[var(--color-primary)] transition-colors">
+                  {pattern.data.title}
+                </a>
+              </h2>
+              {pattern.data.description && (
+                <p class="text-[var(--color-text-muted)] mb-4">{pattern.data.description}</p>
+              )}
+              {pattern.data.tags && (
+                <div class="flex flex-wrap gap-2">
+                  {pattern.data.tags.map(tag => (
+                    <span class="px-3 py-1 bg-[var(--color-bg-subtle)] rounded-full text-sm text-[var(--color-text-subtle)] border border-[var(--color-border)]">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </article>
+          ))}
+        </section>
+      ) : (
+        <div>
+          <div class="bg-[var(--color-earth-100)] dark:bg-[var(--color-earth-900)]/20 border border-[var(--color-earth-300)] dark:border-[var(--color-earth-700)] rounded-lg p-6 mb-12">
+            <p class="text-[var(--color-earth-700)] dark:text-[var(--color-earth-300)]">
+              No patterns have been harvested yet in this repository. 
+              Below are example patterns to illustrate the concept.
+            </p>
+          </div>
+
+          <section class="space-y-8">
+            {examplePatterns.map((pattern, index) => (
+              <article key={index} class="bg-[var(--color-surface)] rounded-lg p-6 border border-[var(--color-border)]">
+                <div class="flex items-start justify-between mb-3">
+                  <h2 class="text-xl font-semibold">{pattern.title}</h2>
+                  <span class="px-3 py-1 bg-[var(--color-sprouted-100)] dark:bg-[var(--color-sprouted-900)]/20 text-[var(--color-sprouted-700)] dark:text-[var(--color-sprouted-300)] rounded-full text-sm border border-[var(--color-sprouted-200)] dark:border-[var(--color-sprouted-700)]">
+                    {pattern.category}
+                  </span>
+                </div>
+                <p class="text-[var(--color-text-muted)] mb-4">{pattern.description}</p>
+                <div class="bg-[var(--color-bg-subtle)] p-4 rounded border border-[var(--color-border)]">
+                  <p class="text-xs text-[var(--color-text-subtle)] uppercase tracking-wide mb-2">Example</p>
+                  <pre class="text-sm text-[var(--color-text-muted)] whitespace-pre-wrap font-mono">{pattern.example}</pre>
+                </div>
+              </article>
+            ))}
+          </section>
+        </div>
+      )}
+
+      <!-- Pattern Categories -->
+      <section class="mt-16">
+        <h2 class="text-2xl font-semibold mb-6">Pattern Categories</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-[var(--color-surface)] rounded-lg p-6 border border-[var(--color-border)]">
+            <h3 class="font-semibold text-lg mb-3 text-[var(--color-text)]">Process Patterns</h3>
+            <p class="text-[var(--color-text-muted)]">
+              Workflows and procedures that make Organic Flow more effective.
+              Examples: Knowledge PR templates, experiment lifecycle, harvest protocols.
+            </p>
+          </div>
+          <div class="bg-[var(--color-surface)] rounded-lg p-6 border border-[var(--color-border)]">
+            <h3 class="font-semibold text-lg mb-3 text-[var(--color-text)]">Technical Patterns</h3>
+            <p class="text-[var(--color-text-muted)]">
+              Code organization and architecture patterns discovered through experiments.
+              Examples: API design, testing strategies, performance optimizations.
+            </p>
+          </div>
+          <div class="bg-[var(--color-surface)] rounded-lg p-6 border border-[var(--color-border)]">
+            <h3 class="font-semibold text-lg mb-3 text-[var(--color-text)]">Team Patterns</h3>
+            <p class="text-[var(--color-text-muted)]">
+              Collaboration practices for teams using Organic Flow.
+              Examples: Review processes, knowledge sharing, onboarding flows.
+            </p>
+          </div>
+          <div class="bg-[var(--color-surface)] rounded-lg p-6 border border-[var(--color-border)]">
+            <h3 class="font-semibold text-lg mb-3 text-[var(--color-text)]">Mindset Patterns</h3>
+            <p class="text-[var(--color-text-muted)]">
+              Mental models and approaches that support knowledge-first development.
+              Examples: Embracing failure, curiosity-driven development, learning loops.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contributing -->
+      <section class="mt-16 bg-[var(--color-sprouted-50)] dark:bg-[var(--color-sprouted-900)]/20 rounded-lg p-8 border border-[var(--color-sprouted-200)] dark:border-[var(--color-sprouted-700)]">
+        <h2 class="text-2xl font-semibold mb-4 text-[var(--color-text)]">Contributing Patterns</h2>
+        <p class="text-[var(--color-text-muted)] mb-6">
+          Patterns emerge from experiments. When you discover a reusable solution:
+        </p>
+        <ol class="list-decimal list-inside space-y-2 text-[var(--color-text-muted)]">
+          <li>Document it in your experiment's harvest</li>
+          <li>If it proves valuable across multiple uses, extract it to <code>patterns/</code></li>
+          <li>Include context, examples, and when to use it</li>
+          <li>Submit a Knowledge PR to share with others</li>
+        </ol>
+      </section>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,192 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import KnowledgeFlowDiagram from '../components/KnowledgeFlowDiagram.astro';
+---
+
+<BaseLayout title="Concepts">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-4xl font-bold mb-8 text-[var(--color-text)]">Core Concepts</h1>
+      
+      <p class="text-xl text-[var(--color-text-muted)] mb-12">
+        Understanding these fundamental concepts will help you get the most out of Organic Flow.
+      </p>
+
+      <!-- Knowledge First -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-4 text-[var(--color-text)]">Knowledge-First Development</h2>
+        <div class="bg-[var(--color-surface)] rounded-lg p-6 border border-[var(--color-border)]">
+          <p class="text-[var(--color-text-muted)] mb-4">
+            Traditional development treats code as primary and documentation as secondary. 
+            Organic Flow inverts this: knowledge becomes primary, code becomes one possible implementation.
+          </p>
+          <div class="grid md:grid-cols-2 gap-6 mt-6">
+            <div>
+              <h3 class="font-semibold mb-2 text-[var(--color-text)]">Traditional Approach</h3>
+              <ul class="space-y-2 text-[var(--color-text-subtle)]">
+                <li>• Write code first</li>
+                <li>• Document later (maybe)</li>
+                <li>• Knowledge lives in developers' heads</li>
+                <li>• Lost when code is deleted</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="font-semibold mb-2 text-[var(--color-text)]">Organic Flow Approach</h3>
+              <ul class="space-y-2 text-[var(--color-text-subtle)]">
+                <li>• Capture understanding first</li>
+                <li>• Code implements knowledge</li>
+                <li>• Knowledge persists in repository</li>
+                <li>• Survives code changes</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- The Flow -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-4">The Knowledge Flow</h2>
+        <KnowledgeFlowDiagram />
+      </section>
+
+      <!-- Key Concepts Grid -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-6">Key Concepts</h2>
+        <div class="grid gap-6">
+          
+          <!-- Inputs -->
+          <div class="bg-[var(--color-surface)] rounded-lg p-6 border border-[var(--color-border)]">
+            <h3 class="text-xl font-semibold mb-3 text-[var(--color-text)]">Inputs</h3>
+            <p class="text-[var(--color-text-muted)] mb-4">
+              Starting points for development: problems to solve, ideas to explore, or observations about the system.
+              Captured without judgment in <code>inputs/</code>.
+            </p>
+            <div class="bg-[var(--color-bg-subtle)] p-4 rounded border border-[var(--color-border)]">
+              <p class="text-sm font-mono text-[var(--color-text-subtle)]">
+                inputs/problems/slow-build-times.md<br/>
+                inputs/ideas/caching-strategy.md<br/>
+                inputs/observations/user-behavior-patterns.md
+              </p>
+            </div>
+          </div>
+
+          <!-- Assumptions -->
+          <div class="bg-[var(--color-surface)] rounded-lg p-6 border border-[var(--color-border)]">
+            <h3 class="text-xl font-semibold mb-3 text-[var(--color-text)]">Assumptions</h3>
+            <p class="text-[var(--color-text-muted)] mb-4">
+              Hypotheses about what might work, stated as clear if/then statements with validation criteria.
+              Forces clear thinking before implementation.
+            </p>
+            <div class="bg-[var(--color-bg-subtle)] p-4 rounded text-sm border border-[var(--color-border)]">
+              <p class="text-[var(--color-text-muted)]">
+                <strong>If</strong> we implement Redis caching for API responses,<br/>
+                <strong>then</strong> we can reduce response times by 80%,<br/>
+                <strong>given</strong> most requests are for unchanged data.
+              </p>
+            </div>
+          </div>
+
+          <!-- Experiments -->
+          <div class="bg-[var(--color-surface)] rounded-lg p-6 border border-[var(--color-border)]">
+            <h3 class="text-xl font-semibold mb-3 text-[var(--color-text)]">Experiments</h3>
+            <p class="text-[var(--color-text-muted)] mb-4">
+              Isolated branches where assumptions are tested. Every experiment produces learning,
+              whether it succeeds or fails. Code is temporary, learning is permanent.
+            </p>
+            <div class="grid grid-cols-2 gap-4 mt-4">
+              <div class="bg-[var(--color-sprouted-100)] dark:bg-[var(--color-sprouted-900)]/20 p-3 rounded border border-[var(--color-sprouted-200)] dark:border-[var(--color-sprouted-700)]">
+                <p class="font-semibold text-[var(--color-sprouted-700)] dark:text-[var(--color-sprouted-300)]">Successful</p>
+                <p class="text-sm text-[var(--color-sprouted-600)] dark:text-[var(--color-sprouted-400)]">Validates assumption</p>
+              </div>
+              <div class="bg-[var(--color-earth-100)] dark:bg-[var(--color-earth-900)]/20 p-3 rounded border border-[var(--color-earth-200)] dark:border-[var(--color-earth-700)]">
+                <p class="font-semibold text-[var(--color-earth-700)] dark:text-[var(--color-earth-300)]">Failed</p>
+                <p class="text-sm text-[var(--color-earth-600)] dark:text-[var(--color-earth-400)]">Equally valuable insight</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Knowledge PR -->
+          <div class="bg-[var(--color-surface)] rounded-lg p-6 border border-[var(--color-border)]">
+            <h3 class="text-xl font-semibold mb-3 text-[var(--color-text)]">Knowledge PRs</h3>
+            <p class="text-[var(--color-text-muted)] mb-4">
+              The mechanism for extracting learning from experiments. Unlike code PRs, 
+              Knowledge PRs add only documentation to the main branch.
+            </p>
+            <ul class="space-y-2 text-[var(--color-text-subtle)]">
+              <li>✓ No code in main branch</li>
+              <li>✓ Captures what worked and what didn't</li>
+              <li>✓ Provides recommendations</li>
+              <li>✓ Links to experiment branch for reference</li>
+            </ul>
+          </div>
+
+          <!-- The Harvest -->
+          <div class="bg-[var(--color-surface)] rounded-lg p-6 border border-[var(--color-border)]">
+            <h3 class="text-xl font-semibold mb-3 text-[var(--color-text)]">The Harvest</h3>
+            <p class="text-[var(--color-text-muted)] mb-4">
+              The process of extracting reusable knowledge from experiments. Like harvesting crops,
+              you gather what's valuable and leave the rest to decompose.
+            </p>
+            <div class="space-y-2">
+              <p class="text-sm text-[var(--color-text-subtle)]">
+                <strong>Extract:</strong> Learnings, patterns, insights
+              </p>
+              <p class="text-sm text-[var(--color-text-subtle)]">
+                <strong>Document:</strong> What worked, what didn't, why
+              </p>
+              <p class="text-sm text-[var(--color-text-subtle)]">
+                <strong>Share:</strong> Via Knowledge PR to main branch
+              </p>
+            </div>
+          </div>
+
+          <!-- Living Documentation -->
+          <div class="bg-[var(--color-surface)] rounded-lg p-6 border border-[var(--color-border)]">
+            <h3 class="text-xl font-semibold mb-3 text-[var(--color-text)]">Living Documentation</h3>
+            <p class="text-[var(--color-text-muted)] mb-4">
+              Documentation that can't become outdated because it IS the source of truth.
+              The main branch contains only knowledge, making docs always accurate.
+            </p>
+            <div class="bg-[var(--color-sprouted-50)] dark:bg-[var(--color-sprouted-900)]/20 p-4 rounded border border-[var(--color-sprouted-200)] dark:border-[var(--color-sprouted-700)]">
+              <p class="text-[var(--color-sprouted-700)] dark:text-[var(--color-sprouted-300)] font-medium">
+                "Documentation that can't drift from reality because it IS the reality"
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Philosophy -->
+      <section class="mb-12 bg-[var(--color-bg-subtle)] rounded-lg p-8 border border-[var(--color-border)]">
+        <h2 class="text-2xl font-semibold mb-4 text-[var(--color-text)]">The Philosophy</h2>
+        <blockquote class="text-xl text-[var(--color-text-muted)] font-medium mb-6 italic">
+          "Code is temporary, knowledge is eternal"
+        </blockquote>
+        <p class="text-[var(--color-text-subtle)]">
+          Software changes constantly. Languages evolve, frameworks come and go, 
+          requirements shift. But the understanding of why decisions were made, 
+          what was tried, what worked, and what didn't—this knowledge remains valuable forever.
+          Organic Flow captures this knowledge systematically, making it the primary artifact of development.
+        </p>
+      </section>
+
+      <!-- Next Steps -->
+      <section class="text-center">
+        <h2 class="text-2xl font-semibold mb-4">Ready to Apply These Concepts?</h2>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/quickstart" 
+             class="inline-flex items-center px-6 py-3 bg-[var(--color-primary)] text-white rounded-lg hover:bg-[var(--color-primary-hover)] transition-colors font-medium">
+            Try the Quick Start
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+          <a href="/guide" 
+             class="inline-flex items-center px-6 py-3 border border-[var(--color-border)] text-[var(--color-text)] rounded-lg hover:bg-[var(--color-surface-hover)] transition-colors font-medium">
+            Read the Full Guide
+          </a>
+        </div>
+      </section>
+    </div>
+  </div>
+</BaseLayout>

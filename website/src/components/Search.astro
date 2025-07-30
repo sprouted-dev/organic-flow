@@ -1,0 +1,87 @@
+---
+// Search component - only works in production after pagefind runs
+---
+
+<div class="search-container">
+  <button 
+    id="search-button" 
+    class="flex items-center space-x-2 px-4 py-2 text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors"
+    aria-label="Search"
+  >
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+    </svg>
+    <span class="text-sm">Search</span>
+    <kbd class="hidden sm:inline-block px-2 py-1 text-xs bg-[var(--color-surface)] rounded">⌘K</kbd>
+  </button>
+</div>
+
+<!-- Search Modal -->
+<div id="search-modal" class="fixed inset-0 z-50 hidden">
+  <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" id="search-backdrop"></div>
+  <div class="fixed inset-x-4 top-20 max-w-2xl mx-auto">
+    <div class="bg-[var(--color-bg)] rounded-lg shadow-2xl overflow-hidden border border-[var(--color-border)]">
+      <div class="flex items-center px-4 border-b border-[var(--color-border)]">
+        <svg class="w-5 h-5 text-[var(--color-text-subtle)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+        <input
+          id="search-input"
+          type="text"
+          placeholder="Search documentation..."
+          class="w-full px-4 py-4 bg-transparent focus:outline-none text-[var(--color-text)] placeholder-[var(--color-text-subtle)]"
+        />
+        <button id="search-close" class="p-2 text-[var(--color-text-subtle)] hover:text-[var(--color-text)] transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div id="search-results" class="max-h-96 overflow-y-auto p-4">
+        <p class="text-[var(--color-text-muted)] text-sm">
+          Search is only available in production builds. Run `pnpm build` to enable search.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Simple search modal functionality for development
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchButton = document.getElementById('search-button');
+    const searchModal = document.getElementById('search-modal');
+    const searchBackdrop = document.getElementById('search-backdrop');
+    const searchClose = document.getElementById('search-close');
+    const searchInput = document.getElementById('search-input');
+    
+    function openSearch() {
+      searchModal?.classList.remove('hidden');
+      searchInput?.focus();
+    }
+    
+    function closeSearch() {
+      searchModal?.classList.add('hidden');
+      if (searchInput) searchInput.value = '';
+    }
+    
+    // Event listeners
+    searchButton?.addEventListener('click', openSearch);
+    searchBackdrop?.addEventListener('click', closeSearch);
+    searchClose?.addEventListener('click', closeSearch);
+    
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      // Cmd/Ctrl + K to open search
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        openSearch();
+      }
+      
+      // Escape to close
+      if (e.key === 'Escape' && searchModal && !searchModal.classList.contains('hidden')) {
+        closeSearch();
+      }
+    });
+  });
+</script>

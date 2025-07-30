@@ -1,0 +1,206 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Quick Start">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-4xl font-bold mb-8 text-[var(--color-text)]">Quick Start: Your First Organic Flow Experiment</h1>
+      
+      <p class="text-xl text-[var(--color-text-muted)] mb-12">
+        Get started with Organic Flow in 5 minutes. No special tools required - just Git and your favorite editor.
+      </p>
+
+      <div class="space-y-12">
+        <!-- Step 1 -->
+        <section>
+          <h2 class="text-2xl font-semibold mb-4 flex items-center text-[var(--color-text)]">
+            <span class="step-number mr-3">1</span>
+            Initialize Your Repository
+          </h2>
+          <p class="mb-4">Create a new repository with the Organic Flow structure:</p>
+          <pre class="code-block"><code>mkdir my-project && cd my-project
+git init
+
+# Create the knowledge structure
+mkdir -p inputs/problems inputs/ideas inputs/observations
+mkdir -p assumptions specifications learnings patterns knowledge
+
+# Create the experiments registry
+echo "experiments: []" > experiments.yaml
+
+# Initial commit (knowledge only!)
+git add .
+git commit -m "Initialize Organic Flow repository"</code></pre>
+        </section>
+
+        <!-- Step 2 -->
+        <section>
+          <h2 class="text-2xl font-semibold mb-4 flex items-center text-[var(--color-text)]">
+            <span class="step-number mr-3">2</span>
+            Document Your First Input
+          </h2>
+          <p class="mb-4">Start with a problem, idea, or observation:</p>
+          <pre class="code-block"><code># Create an input document
+cat > inputs/problems/slow-test-suite.md << 'EOF'
+# Slow Test Suite
+
+**Created**: $(date +%Y-%m-%d)
+**Submitted by**: Your Name
+
+## The Problem
+
+Our test suite takes 15 minutes to run, making the feedback loop painfully slow. 
+Developers avoid running tests locally, leading to more CI failures.
+
+## Current Impact
+- Developers skip tests before pushing
+- CI pipeline bottleneck
+- Slower feature development
+
+## Constraints
+- Must maintain test coverage
+- Limited budget for new infrastructure
+EOF
+
+git add inputs/problems/slow-test-suite.md
+git commit -m "Document slow test suite problem"</code></pre>
+        </section>
+
+        <!-- Step 3 -->
+        <section>
+          <h2 class="text-2xl font-semibold mb-4 flex items-center text-[var(--color-text)]">
+            <span class="step-number mr-3">3</span>
+            State Your Assumption
+          </h2>
+          <p class="mb-4">What do you think will work?</p>
+          <pre class="code-block"><code>cat > assumptions/parallel-test-execution.md << 'EOF'
+# Assumption: Parallel Test Execution
+
+**Created**: $(date +%Y-%m-%d)
+**Related to**: inputs/problems/slow-test-suite.md
+
+## Hypothesis
+
+If we run tests in parallel using pytest-xdist,
+then we can reduce test suite runtime by 60-70%,
+given our tests are mostly CPU-bound and independent.
+
+## Validation Criteria
+- Test suite runs in under 5 minutes
+- No flaky test failures from parallelization
+- Easy to run locally and in CI
+
+## Risks
+- Some tests might have hidden dependencies
+- Database tests might conflict
+- Memory usage might spike
+EOF
+
+git add assumptions/parallel-test-execution.md
+git commit -m "Assume parallel execution will speed up tests"</code></pre>
+        </section>
+
+        <!-- Step 4 -->
+        <section>
+          <h2 class="text-2xl font-semibold mb-4 flex items-center">
+            <span class="w-10 h-10 bg-gradient-to-br from-sprouted-500 to-sprouted-700 text-white rounded-full flex items-center justify-center mr-3 font-bold shadow-md">4</span>
+            Run Your Experiment
+          </h2>
+          <p class="mb-4">Create an experiment branch to test your assumption:</p>
+          <pre class="code-block"><code># Create experiment branch
+git checkout -b experiment/parallel-tests
+
+# Now write code to test your assumption
+# Install pytest-xdist, update test configuration, fix any issues...
+# This is where you do actual coding!
+
+# Track the experiment in main
+git checkout main
+cat >> experiments.yaml << 'EOF'
+
+  - id: parallel-test-execution
+    type: experiment
+    branch: experiment/parallel-tests
+    started: $(date +%Y-%m-%d)
+    status: active
+    assumption: "Parallel execution will reduce test time by 60-70%"
+EOF
+
+git add experiments.yaml
+git commit -m "Track parallel test execution experiment"</code></pre>
+        </section>
+
+        <!-- Step 5 -->
+        <section>
+          <h2 class="text-2xl font-semibold mb-4 flex items-center">
+            <span class="w-10 h-10 bg-gradient-to-br from-sprouted-500 to-sprouted-700 text-white rounded-full flex items-center justify-center mr-3 font-bold shadow-md">5</span>
+            Harvest Your Knowledge
+          </h2>
+          <p class="mb-4">Extract learnings from your experiment (succeed or fail):</p>
+          <pre class="code-block"><code># After experiment completes, create a Knowledge PR
+cat > learnings/parallel-test-execution-results.md << 'EOF'
+# Learning: Parallel Test Execution Results
+
+**Created**: $(date +%Y-%m-%d)
+**Experiment**: experiment/parallel-tests
+**Outcome**: Partial Success
+
+## What We Learned
+
+1. **Performance Gain**: Achieved 65% speedup (15min → 5.5min)
+2. **Database Conflicts**: 12 tests failed due to database isolation issues
+3. **Memory Usage**: Peak memory increased 3x but stayed within limits
+
+## What Worked
+- CPU-bound unit tests parallelized perfectly
+- pytest-xdist was easy to integrate
+- CI integration was straightforward
+
+## What Didn't Work
+- Database tests need separate handling
+- Some fixtures weren't thread-safe
+- Coverage reporting got complicated
+
+## Recommendations
+1. Run database tests separately (not parallel)
+2. Mark thread-unsafe tests with @pytest.mark.serial
+3. Use --dist loadscope for better test grouping
+EOF
+
+git add learnings/parallel-test-execution-results.md
+git commit -m "Harvest learnings from parallel test experiment"</code></pre>
+        </section>
+
+        <!-- Next Steps -->
+        <section class="bg-gradient-to-br from-sprouted-50 to-sprouted-100 dark:from-sprouted-950 dark:to-sprouted-900 rounded-lg p-8 shadow-lg border border-sprouted-200 dark:border-sprouted-800">
+          <h2 class="text-2xl font-semibold mb-4 text-sprouted-800 dark:text-sprouted-200">🌱 Congratulations!</h2>
+          <p class="mb-4">You've just completed your first Organic Flow cycle. You've learned:</p>
+          <ul class="list-disc list-inside space-y-2 mb-6">
+            <li>How to structure knowledge separately from code</li>
+            <li>How to document inputs before jumping to solutions</li>
+            <li>How to state clear assumptions to test</li>
+            <li>How to run experiments in isolated branches</li>
+            <li>How to harvest knowledge regardless of outcome</li>
+          </ul>
+          
+          <h3 class="text-lg font-semibold mb-3">Next Steps</h3>
+          <div class="space-y-3">
+            <a href="/guide/organic-flow-practical-guide" class="block p-4 bg-white dark:bg-gray-800 rounded-lg hover:shadow-lg transition-all duration-200 border border-sprouted-200 dark:border-sprouted-700 hover:border-sprouted-400 dark:hover:border-sprouted-500">
+              <span class="font-semibold text-sprouted-700 dark:text-sprouted-300">Read the Practical Guide</span>
+              <span class="text-gray-600 dark:text-gray-400"> - Deeper dive into daily workflow</span>
+            </a>
+            <a href="/guide/organic-flow-knowledge-pr" class="block p-4 bg-white dark:bg-gray-800 rounded-lg hover:shadow-lg transition-all duration-200 border border-sprouted-200 dark:border-sprouted-700 hover:border-sprouted-400 dark:hover:border-sprouted-500">
+              <span class="font-semibold text-sprouted-700 dark:text-sprouted-300">Learn About Knowledge PRs</span>
+              <span class="text-gray-600 dark:text-gray-400"> - The key innovation</span>
+            </a>
+            <a href="/examples" class="block p-4 bg-white dark:bg-gray-800 rounded-lg hover:shadow-lg transition-all duration-200 border border-sprouted-200 dark:border-sprouted-700 hover:border-sprouted-400 dark:hover:border-sprouted-500">
+              <span class="font-semibold text-sprouted-700 dark:text-sprouted-300">Browse Real Examples</span>
+              <span class="text-gray-600 dark:text-gray-400"> - See OF in action</span>
+            </a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

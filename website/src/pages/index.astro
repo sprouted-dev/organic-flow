@@ -1,0 +1,152 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import KnowledgeFlowDiagram from '../components/KnowledgeFlowDiagram.astro';
+---
+
+<BaseLayout title="Home">
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden bg-[var(--color-bg-muted)]">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
+      <div class="max-w-3xl mx-auto text-center">
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-[var(--color-text)] mb-6">
+          Knowledge is eternal,<br />
+          <span class="text-gradient-organic">code is temporary</span>
+        </h1>
+        <p class="text-xl text-[var(--color-text-muted)] mb-8">
+          Organic Flow inverts traditional software development: understanding becomes primary, 
+          implementation becomes secondary. Learn once, regenerate forever.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/quickstart" 
+             class="inline-flex items-center px-6 py-3 bg-[var(--color-primary-bg)] hover:bg-[var(--color-primary-bg-hover)] text-[var(--color-primary-text)] rounded-lg transition-all duration-200 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 btn-press">
+            Get Started in 5 Minutes
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+          <a href="/guide" 
+             class="inline-flex items-center px-6 py-3 btn-ghost rounded-lg transition-all duration-200 font-medium">
+            Read the Guide
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Flow Diagram -->
+  <section class="py-20 bg-[var(--color-bg)]">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center mb-12 text-[var(--color-text)]">How Organic Flow Works</h2>
+      <div class="max-w-4xl mx-auto mb-16">
+        <KnowledgeFlowDiagram />
+      </div>
+      <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div class="surface-neutral rounded-lg p-6 card-hover">
+          <div class="w-12 h-12 bg-[var(--color-sprouted-100)] rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-[var(--color-sprouted-600)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-2 text-[var(--color-text)]">Capture Inputs</h3>
+          <p class="text-[var(--color-text-muted)]">
+            Document problems, ideas, and observations before writing any code. Clear thinking leads to better solutions.
+          </p>
+        </div>
+        <div class="surface-neutral rounded-lg p-6 card-hover">
+          <div class="w-12 h-12 bg-[var(--color-stone-100)] rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-[var(--color-stone-600)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-2 text-[var(--color-text)]">Run Experiments</h3>
+          <p class="text-[var(--color-text-muted)]">
+            Test assumptions in isolated branches. Every experiment, successful or failed, produces valuable insights.
+          </p>
+        </div>
+        <div class="surface-neutral rounded-lg p-6 card-hover">
+          <div class="w-12 h-12 bg-[var(--color-earth-100)] rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-[var(--color-earth-600)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-2 text-[var(--color-text)]">Harvest Knowledge</h3>
+          <p class="text-[var(--color-text-muted)]">
+            Extract learnings via Knowledge PRs. Build a permanent knowledge base that outlasts any codebase.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="py-20 bg-[var(--color-bg-subtle)]">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-12 text-[var(--color-text)]">Why Teams Choose Organic Flow</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-xl font-semibold mb-3 flex items-center text-[var(--color-text)]">
+              <svg class="w-5 h-5 text-[var(--color-primary)] mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              No More Knowledge Loss
+            </h3>
+            <p class="text-[var(--color-text-muted)] mb-6">
+              When developers leave or code gets deleted, the understanding remains. Every insight is systematically captured.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold mb-3 flex items-center text-[var(--color-text)]">
+              <svg class="w-5 h-5 text-[var(--color-primary)] mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              Learn From Every Attempt
+            </h3>
+            <p class="text-[var(--color-text-muted)] mb-6">
+              Failed experiments become as valuable as successes. Build on past learnings instead of repeating mistakes.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold mb-3 flex items-center text-[var(--color-text)]">
+              <svg class="w-5 h-5 text-[var(--color-primary)] mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              Living Documentation
+            </h3>
+            <p class="text-[var(--color-text-muted)] mb-6">
+              Documentation that can't drift from reality because it IS the reality. Knowledge drives code, not vice versa.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold mb-3 flex items-center text-[var(--color-text)]">
+              <svg class="w-5 h-5 text-[var(--color-primary)] mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              Faster Onboarding
+            </h3>
+            <p class="text-[var(--color-text-muted)] mb-6">
+              New team members understand the "why" behind decisions. Context is preserved, not lost in code archaeology.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 gradient-subtle">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold mb-4 text-[var(--color-text)]">Ready to Transform Your Development Process?</h2>
+      <p class="text-xl text-[var(--color-text-muted)] mb-8 max-w-2xl mx-auto">
+        Start small with your next experiment. See how knowledge-first development changes everything.
+      </p>
+      <a href="/quickstart" 
+         class="inline-flex items-center px-8 py-4 bg-[var(--color-primary-bg)] hover:bg-[var(--color-primary-bg-hover)] text-[var(--color-primary-text)] rounded-lg transition-all duration-200 font-medium text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 btn-press">
+        Start Your First Experiment
+        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </a>
+    </div>
+  </section>
+</BaseLayout>

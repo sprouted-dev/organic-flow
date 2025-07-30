@@ -1,0 +1,297 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const colorGroups = [
+  {
+    name: 'Primary Brand - Soft Sage Green',
+    description: 'The foundation of our visual identity - sophisticated and natural',
+    colors: [
+      { name: 'Sprouted 50', var: '--color-sprouted-50', value: '#f7faf5', hex: 'f7faf5' },
+      { name: 'Sprouted 100', var: '--color-sprouted-100', value: '#ecf2e8', hex: 'ecf2e8' },
+      { name: 'Sprouted 200', var: '--color-sprouted-200', value: '#d9e5d1', hex: 'd9e5d1' },
+      { name: 'Sprouted 300', var: '--color-sprouted-300', value: '#b9d0a9', hex: 'b9d0a9' },
+      { name: 'Sprouted 400', var: '--color-sprouted-400', value: '#82b366', hex: '82b366', primary: true },
+      { name: 'Sprouted 500', var: '--color-sprouted-500', value: '#6b9551', hex: '6b9551' },
+      { name: 'Sprouted 600', var: '--color-sprouted-600', value: '#557a3f', hex: '557a3f' },
+      { name: 'Sprouted 700', var: '--color-sprouted-700', value: '#415f30', hex: '415f30' },
+      { name: 'Sprouted 800', var: '--color-sprouted-800', value: '#2d4521', hex: '2d4521' },
+      { name: 'Sprouted 900', var: '--color-sprouted-900', value: '#1a2a13', hex: '1a2a13' },
+    ]
+  },
+  {
+    name: 'Neutral Grays - Natural Stone',
+    description: 'Foundation colors for sophisticated UI elements',
+    colors: [
+      { name: 'Stone 50', var: '--color-stone-50', value: '#fafaf9', hex: 'fafaf9' },
+      { name: 'Stone 100', var: '--color-stone-100', value: '#f5f5f4', hex: 'f5f5f4' },
+      { name: 'Stone 200', var: '--color-stone-200', value: '#e7e5e4', hex: 'e7e5e4' },
+      { name: 'Stone 300', var: '--color-stone-300', value: '#d6d3d1', hex: 'd6d3d1' },
+      { name: 'Stone 400', var: '--color-stone-400', value: '#a8a29e', hex: 'a8a29e' },
+      { name: 'Stone 500', var: '--color-stone-500', value: '#78716c', hex: '78716c' },
+      { name: 'Stone 600', var: '--color-stone-600', value: '#57534e', hex: '57534e' },
+      { name: 'Stone 700', var: '--color-stone-700', value: '#44403c', hex: '44403c' },
+      { name: 'Stone 800', var: '--color-stone-800', value: '#292524', hex: '292524' },
+      { name: 'Stone 900', var: '--color-stone-900', value: '#1c1917', hex: '1c1917' },
+    ]
+  },
+  {
+    name: 'Accent 1 - Muted Earth Tone',
+    description: 'Warm accent used sparingly for emphasis',
+    colors: [
+      { name: 'Earth 50', var: '--color-earth-50', value: '#faf9f7', hex: 'faf9f7' },
+      { name: 'Earth 100', var: '--color-earth-100', value: '#f3f0eb', hex: 'f3f0eb' },
+      { name: 'Earth 200', var: '--color-earth-200', value: '#e4ddd4', hex: 'e4ddd4' },
+      { name: 'Earth 300', var: '--color-earth-300', value: '#d2c6ba', hex: 'd2c6ba' },
+      { name: 'Earth 400', var: '--color-earth-400', value: '#b89f88', hex: 'b89f88', primary: true },
+      { name: 'Earth 500', var: '--color-earth-500', value: '#9d8470', hex: '9d8470' },
+      { name: 'Earth 600', var: '--color-earth-600', value: '#826a58', hex: '826a58' },
+      { name: 'Earth 700', var: '--color-earth-700', value: '#675240', hex: '675240' },
+      { name: 'Earth 800', var: '--color-earth-800', value: '#4c3a2e', hex: '4c3a2e' },
+      { name: 'Earth 900', var: '--color-earth-900', value: '#31241d', hex: '31241d' },
+    ]
+  },
+  {
+    name: 'Accent 2 - Muted Slate Blue',
+    description: 'Cool accent used very sparingly for contrast',
+    colors: [
+      { name: 'Slate 50', var: '--color-slate-50', value: '#f8f9fa', hex: 'f8f9fa' },
+      { name: 'Slate 100', var: '--color-slate-100', value: '#f0f2f4', hex: 'f0f2f4' },
+      { name: 'Slate 200', var: '--color-slate-200', value: '#dfe3e8', hex: 'dfe3e8' },
+      { name: 'Slate 300', var: '--color-slate-300', value: '#c5cdd6', hex: 'c5cdd6' },
+      { name: 'Slate 400', var: '--color-slate-400', value: '#8b9cab', hex: '8b9cab', primary: true },
+      { name: 'Slate 500', var: '--color-slate-500', value: '#6b7c8b', hex: '6b7c8b' },
+      { name: 'Slate 600', var: '--color-slate-600', value: '#526170', hex: '526170' },
+      { name: 'Slate 700', var: '--color-slate-700', value: '#3e4956', hex: '3e4956' },
+      { name: 'Slate 800', var: '--color-slate-800', value: '#2a323b', hex: '2a323b' },
+      { name: 'Slate 900', var: '--color-slate-900', value: '#1a1f25', hex: '1a1f25' },
+    ]
+  }
+];
+
+const gradients = [
+  { name: 'Organic', class: 'gradient-organic', description: 'Primary brand gradient' },
+  { name: 'Earth', class: 'gradient-earth', description: 'Neutral stone gradient' },
+  { name: 'Subtle', class: 'gradient-subtle', description: 'Very light accent gradient' },
+];
+---
+
+<BaseLayout title="Color Palette - Organic Flow">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="max-w-7xl mx-auto">
+      <div class="mb-12">
+        <h1 class="text-4xl font-bold mb-4">Organic Flow Color System</h1>
+        <p class="text-xl text-[var(--color-text-secondary)] max-w-3xl">
+          A sophisticated, restrained palette inspired by forest floors and natural stone. 
+          Our colors create calm, professional interfaces with organic undertones.
+        </p>
+      </div>
+
+      <!-- Core Philosophy -->
+      <section class="mb-16 bg-[var(--color-surface)] rounded-2xl p-8 border border-[var(--color-border)]">
+        <h2 class="text-2xl font-semibold mb-4">Design Philosophy</h2>
+        <div class="grid md:grid-cols-3 gap-6 text-[var(--color-text-secondary)]">
+          <div>
+            <h3 class="font-semibold text-[var(--color-text-primary)] mb-2">Sophisticated Simplicity</h3>
+            <p>Mostly neutrals with strategic green accents create elegant, timeless interfaces.</p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-[var(--color-text-primary)] mb-2">Forest Floor Palette</h3>
+            <p>Inspired by moss, stone, and earth - natural colors that feel organic yet professional.</p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-[var(--color-text-primary)] mb-2">Strategic Color Use</h3>
+            <p>Color guides attention, not decoration. Every hue has purpose and meaning.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Color Groups -->
+      {colorGroups.map((group) => (
+        <section class="mb-12">
+          <div class="mb-6">
+            <h2 class="text-2xl font-semibold mb-2">{group.name}</h2>
+            <p class="text-[var(--color-text-secondary)]">{group.description}</p>
+          </div>
+          
+          <div class="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-10 gap-3">
+            {group.colors.map((color) => (
+              <div class="group">
+                <div 
+                  class={`h-24 rounded-lg mb-2 transition-transform hover:scale-105 ${
+                    color.primary ? 'ring-2 ring-offset-2 ring-[var(--color-primary)]' : ''
+                  }`}
+                  style={`background-color: ${color.value}`}
+                ></div>
+                <p class={`text-sm font-medium mb-1 ${color.primary ? 'text-[var(--color-primary)]' : ''}`}>
+                  {color.name.split(' ')[1]}
+                </p>
+                <p class="text-xs text-[var(--color-text-tertiary)] font-mono">
+                  #{color.hex}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+      ))}
+
+      <!-- Gradients -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-6">Gradients</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          {gradients.map((gradient) => (
+            <div class="space-y-2">
+              <div class={`h-32 rounded-lg ${gradient.class}`}></div>
+              <p class="font-semibold">{gradient.name}</p>
+              <p class="text-sm text-[var(--color-text-secondary)]">{gradient.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Usage Examples -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-6">Usage Examples</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- Buttons -->
+          <div class="surface-neutral rounded-lg p-6">
+            <h3 class="text-lg font-semibold mb-4">Buttons</h3>
+            <div class="space-y-3">
+              <div class="flex gap-3">
+                <button class="btn-primary px-6 py-2 rounded-lg font-medium btn-press">
+                  Primary Action
+                </button>
+                <button class="btn-secondary px-6 py-2 rounded-lg font-medium btn-press">
+                  Secondary
+                </button>
+                <button class="btn-ghost px-6 py-2 rounded-lg font-medium btn-press">
+                  Ghost
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Badges -->
+          <div class="surface-neutral rounded-lg p-6">
+            <h3 class="text-lg font-semibold mb-4">Badges</h3>
+            <div class="flex gap-3">
+              <span class="badge-primary px-3 py-1 rounded-full text-sm font-medium">
+                Primary
+              </span>
+              <span class="badge-neutral px-3 py-1 rounded-full text-sm font-medium">
+                Neutral
+              </span>
+              <span class="badge-accent px-3 py-1 rounded-full text-sm font-medium">
+                Accent
+              </span>
+            </div>
+          </div>
+
+          <!-- Cards -->
+          <div class="surface-neutral rounded-lg p-6">
+            <h3 class="text-lg font-semibold mb-4">Card Surfaces</h3>
+            <div class="space-y-3">
+              <div class="surface-primary rounded-lg p-4 card-hover">
+                <p class="font-medium">Primary Surface</p>
+                <p class="text-sm text-[var(--color-text-secondary)]">Subtle green background</p>
+              </div>
+              <div class="surface-accent rounded-lg p-4 card-hover">
+                <p class="font-medium">Accent Surface</p>
+                <p class="text-sm text-[var(--color-text-secondary)]">Warm earth tone</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Text Hierarchy -->
+          <div class="surface-neutral rounded-lg p-6">
+            <h3 class="text-lg font-semibold mb-4">Text Hierarchy</h3>
+            <div class="space-y-2">
+              <p class="text-[var(--color-text-primary)] font-semibold">Primary Text</p>
+              <p class="text-[var(--color-text-secondary)]">Secondary text for supporting content</p>
+              <p class="text-[var(--color-text-tertiary)]">Tertiary text for metadata</p>
+              <p class="text-[var(--color-primary)]">Link text color</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Color Usage Guidelines -->
+      <section class="mb-12 bg-[var(--color-surface-subtle)] rounded-2xl p-8">
+        <h2 class="text-2xl font-semibold mb-6">Usage Guidelines</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="font-semibold mb-3">Do</h3>
+            <ul class="space-y-2 text-[var(--color-text-secondary)]">
+              <li class="flex items-start">
+                <span class="text-[var(--color-success)] mr-2">✓</span>
+                Use green as the primary accent for important actions
+              </li>
+              <li class="flex items-start">
+                <span class="text-[var(--color-success)] mr-2">✓</span>
+                Keep most UI elements in neutral tones
+              </li>
+              <li class="flex items-start">
+                <span class="text-[var(--color-success)] mr-2">✓</span>
+                Use earth tones sparingly for warmth
+              </li>
+              <li class="flex items-start">
+                <span class="text-[var(--color-success)] mr-2">✓</span>
+                Maintain high contrast for accessibility
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-semibold mb-3">Don't</h3>
+            <ul class="space-y-2 text-[var(--color-text-secondary)]">
+              <li class="flex items-start">
+                <span class="text-[var(--color-error)] mr-2">✗</span>
+                Use too many colors at once
+              </li>
+              <li class="flex items-start">
+                <span class="text-[var(--color-error)] mr-2">✗</span>
+                Create rainbow-like interfaces
+              </li>
+              <li class="flex items-start">
+                <span class="text-[var(--color-error)] mr-2">✗</span>
+                Use color for decoration without purpose
+              </li>
+              <li class="flex items-start">
+                <span class="text-[var(--color-error)] mr-2">✗</span>
+                Mix warm and cool accents heavily
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- CSS Variables Reference -->
+      <section>
+        <h2 class="text-2xl font-semibold mb-6">CSS Variables Reference</h2>
+        <div class="bg-[var(--color-stone-900)] text-[var(--color-stone-100)] p-6 rounded-lg overflow-x-auto">
+          <pre class="text-sm"><code>{`/* Primary Colors */
+var(--color-primary)              /* #82b366 */
+var(--color-primary-hover)        /* #6b9551 */
+var(--color-primary-active)       /* #557a3f */
+
+/* Secondary Colors */
+var(--color-secondary)            /* #8b9cab */
+var(--color-secondary-hover)      /* #6b7c8b */
+
+/* Accent Colors */
+var(--color-accent)               /* #b89f88 */
+var(--color-accent-hover)         /* #9d8470 */
+
+/* Text Colors */
+var(--color-text-primary)         /* #1c1917 */
+var(--color-text-secondary)       /* #44403c */
+var(--color-text-tertiary)        /* #57534e */
+
+/* Surface Colors */
+var(--color-background)           /* #ffffff */
+var(--color-surface)              /* #fafaf9 */
+var(--color-surface-subtle)       /* #f7faf5 */
+var(--color-border)               /* #e7e5e4 */`}</code></pre>
+        </div>
+      </section>
+    </div>
+  </div>
+</BaseLayout>
